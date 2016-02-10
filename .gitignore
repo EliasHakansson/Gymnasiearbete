@@ -45,3 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.class
+sasdwasd/.classpath
+sasdwasd/.project
+sasdwasd/.settings/org.eclipse.jdt.core.prefs

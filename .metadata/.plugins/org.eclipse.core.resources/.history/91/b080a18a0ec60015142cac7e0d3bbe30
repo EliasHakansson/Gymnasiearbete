@@ -1,0 +1,36 @@
+package game.graphics;
+
+import java.util.Random;
+
+public class Screen {
+	
+	public int width, height;
+	public int[] pixels;
+	public final int MAP_SIZE = 64;
+	public final int MAP_SIZE_MASK = MAP_SIZE -1;
+	public int[] tiles = new int[64*64];
+	private Random random = new Random();
+	
+	public Screen(int width, int height) {
+		this.width = width;
+		this.height = height;
+		pixels = new int[width*height];							//skapar en integer för varje pixel i spelet, 50400 st
+	
+		for (int i = 0; i < MAP_SIZE*MAP_SIZE; i++){
+			tiles[i] = random.nextInt(0xffffff);
+		}
+	}
+	
+	public void clear(){
+		for(int i= 0; i< pixels.length; i++){						
+			pixels[i]= 0;					 					//tar bort tidigare tidigare position av pixlar
+		}
+	}	
+	public void render(int xOffset, int yOffset){				//rendring av pixlar	
+		for (int y = 0; y < height; y++){						//radbyte vid pixelrendering	
+			for (int x = 0; x < width; x++){							
+				pixels[x + y * width] = Sprite.grass.pixels[(x & 15)+(y & 15)*16];				
+			}
+		}
+	}
+}

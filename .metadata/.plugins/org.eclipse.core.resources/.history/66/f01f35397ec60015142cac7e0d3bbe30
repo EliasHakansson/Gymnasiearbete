@@ -1,0 +1,7 @@
+package game.level;
+
+import game.level.Level;
+
+public class RandomLevel extends Level {
+
+}

@@ -1,0 +1,42 @@
+package game.graphics;
+
+public class Screen {
+	
+	public int width, height;
+	public int[] pixels;
+	
+	int xtime = 0, ytime= 0;
+	int counter = 0;
+	
+	public Screen(int width, int height) {
+		this.width = width;
+		this.height = height;
+		pixels = new int[width*height];						//skapar en integer för varje pixel i spelet, 50400 st
+	}
+	
+	public void clear(){
+		for(int i= 0; i< pixels.length; i++){
+			pixels[i]= 0;									//tar bort tidigare tidigare position av pixlar
+		}
+	}
+	
+	public void render(){									//rendring av pixlar
+		counter++;
+		if (counter % 10 == 0)
+			xtime++;
+		if (counter % 10 == 0)
+			ytime++;
+		
+		for (int y = 0; y < height; y++){					//radbyte vid pixelrendering	
+			if (ytime < 0 || ytime >= width){
+				break;
+			}		
+			for (int x = 0; x < width; x++){							
+				if (xtime <0 || xtime >= width ){	
+					break; 
+				}	
+				pixels[xtime + 40 * width] = 0xff00ff; 				
+			}
+		}
+	}
+}

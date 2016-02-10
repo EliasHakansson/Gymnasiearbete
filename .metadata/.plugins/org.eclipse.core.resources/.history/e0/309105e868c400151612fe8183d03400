@@ -1,0 +1,136 @@
+package game;
+
+import java.awt.BorderLayout;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+
+import javax.swing.JFrame;
+import game.graphics.Screen;
+
+public class GameMain extends Canvas implements Runnable{
+	
+	private static final long serialVersionUID = 1L;
+
+	public static final int width = 500;					
+	public static final int height = 150;
+	public static final int scale =3;					//Ändrar storlek, inte mängden pixlar
+	public static final String name = "Game";
+	
+	private JFrame frame;
+	
+	public boolean running = false;
+	public int tickCount = 0;
+	
+	private Screen screen;
+	
+	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);		//skapar en ritbar bild som inte går att manipulera
+	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();			//Gör bilden manipulerbar 
+	
+	public GameMain(){
+		Dimension canvasSize = (new Dimension(width*scale,height*scale));
+		setPreferredSize(canvasSize);
+	
+		screen = new Screen(width, height);
+		frame = new JFrame(name);
+	
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Avslutar programmet vid fönstrets nedstängning
+		frame.setLayout(new BorderLayout());					//
+		frame.add(this, BorderLayout.CENTER);					//frame = Game
+		frame.pack();											//Gör ramen till samma storlek som image
+		frame.setResizable(false);								//Gör att man inte kan ändra skärmens storlek
+		frame.setLocationRelativeTo(null);						//centrerar ramen på skärmen
+		frame.setVisible(true);									//visar ramen
+	}
+	
+	private Thread thread;
+	
+	
+	public synchronized void start() {							//startar tråden vilket startar run-metoden	
+		running = true;
+		thread = new Thread(this, "display");
+		thread.start();
+	}
+	public synchronized void stop() {							//
+		running = false;
+		try{
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void run(){	
+		long lastTime = System.nanoTime();					//tiden vid start av spelet,i nanosekunder
+		double nsPerTick = 1000000000/60;					//konverterar nanosekunder till millisekunder
+		
+		int ticks = 0;										
+		int frames = 0;										
+		
+		long lastTimer = System.currentTimeMillis();
+		double delta=0;										
+		
+		while (running){
+			long now = System.nanoTime();					
+			delta += (now - lastTime)/nsPerTick;
+			lastTime = now;
+			boolean shouldRender=true;
+			
+			while(delta >= 1){
+				ticks++;
+				tick();
+				delta -= 1;
+				shouldRender = true;
+			}
+			try {
+				Thread.sleep(2);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}			
+			if (shouldRender){
+				frames++;
+				render();
+			}		
+			if(System.currentTimeMillis()- lastTimer >= 1000){
+				lastTimer +=1000;
+				System.out.println(frames + "," + ticks);
+				frames=0;
+				ticks=0;
+			}
+		}
+	}	
+	public void tick(){	
+		tickCount++;
+		
+		for (int i =0; i <pixels.length; i++){
+			pixels[i] = i+tickCount;
+		}
+	}	
+	public void render(){										//Begränsar hastigheten på objekt inom spelet.
+		BufferStrategy bs = getBufferStrategy();
+		if (bs == null) {										//Om canvas bufferStrategy inte existerar skapas en.
+			createBufferStrategy(3);							//Kan spara 2 bilder i minnet samtidigt och de kan rendras samtidigt. 3 = the magic number.
+			return;
+		}
+		screen.clear();											//clearar tidigare skärmen
+		screen.render();										//rendrar den nya skärmen
+		
+		for (int i = 0; i< pixels.length; i++ ){
+			pixels[i] = screen.pixels[i];
+		}
+		Graphics g = bs.getDrawGraphics();						//skapar ny grafik för bufferStrategy
+		
+		g.setColor(new Color(20, 70, 120));						//ställer in färgen för grafiken
+		g.fillRect(0, 0, getWidth(), getHeight());				//fyller fönstret med färgen		
+		g.drawImage(image, 0 ,0, getWidth(), getHeight(), null);
+		g.dispose();											//tar bort överflödig/tidigare grafik
+		bs.show();												//visar grafiken
+	}
+	public static void main(String[]args) {
+		new GameMain().start();	
+	}	
+}
