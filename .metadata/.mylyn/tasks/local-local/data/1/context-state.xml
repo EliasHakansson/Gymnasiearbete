@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContextState>
+<org.eclipse.mylyn.context.ui.editors>
+<MonitoredWindowOpenEditors class="org.eclipse.ui.internal.WorkbenchWindow" isActive="true" isLaunching="true" number="0">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameMain.java" partName="GameMain.java" title="GameMain.java" tooltip="Game/src/game/GameMain.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Game/src/game/GameMain.java"/>
+<editorState selectionHorizontalPixel="176" selectionLength="0" selectionOffset="3546" selectionTopPixel="1822"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Mob.java" partName="Mob.java" title="Mob.java" tooltip="Game/src/game/entity/mob/Mob.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Game/src/game/entity/mob/Mob.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="594" selectionTopPixel="50"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Player.java" partName="Player.java" title="Player.java" tooltip="Game/src/game/entity/mob/Player.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Game/src/game/entity/mob/Player.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1347" selectionTopPixel="629"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Screen.java" partName="Screen.java" title="Screen.java" tooltip="Game/src/game/graphics/Screen.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Game/src/game/graphics/Screen.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="142" selectionTopPixel="0"/>
+</editor>
+</MonitoredWindowOpenEditors>
+</org.eclipse.mylyn.context.ui.editors>
+</ContextState>

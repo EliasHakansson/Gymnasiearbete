@@ -3,6 +3,7 @@ package game.entity.mob;
 import game.graphics.Screen;
 import game.graphics.Sprite;
 import game.input.Keyboard;
+import game.input.Mouse;
 
 public class Player extends Mob{
 
@@ -21,7 +22,7 @@ public class Player extends Mob{
 		this.x = x;
 		this.y = y;
 		this.input = input;
-		sprite = Sprite.player_up;
+		sprite = Sprite.player_down;
 	}
 	
 	public void tick(){
@@ -33,7 +34,9 @@ public class Player extends Mob{
 		if(input.down) ya++;
 		if(input.left) xa--;
 		if(input.right) xa++;
-	
+		if(Mouse.getButton()==1){
+			shoot(x, y, dir);
+		}
 		if(xa != 0 || ya != 0) {
 			move(xa,ya);
 			walking = true;
@@ -41,11 +44,21 @@ public class Player extends Mob{
 		else {
 			walking = false;
 		}
+		updateShooting();
 	}
 	
-	public void render(Screen screen){
-		int flip = 0;
+	private void updateShooting() {	
+		if(Mouse.getButton()==1){
+			double dx = Mouse.getX()- 300/2;
+			double dy = Mouse.getY()-(300/16*9)/2;
+			double dir = Math.atan2(dy, dx);
 			
+			shoot( x, y, dir);
+		}	
+	}
+
+	public void render(Screen screen){
+		int flip = 0;	
 		if(dir == 0){
 			sprite = Sprite.player_up;
 			if (walking ){
@@ -53,20 +66,47 @@ public class Player extends Mob{
 					sprite = Sprite.player_up_1;
 				}
 				else {
-					sprite = Sprite.player_up_2;
+					sprite = Sprite.player_up_2;		
 				}
 			}
 		}
-		if(dir == 1)
+		if(dir == 1){
 			sprite = Sprite.player_side;	
-		if(dir == 2)
+			if (walking ){
+				if(animation % 20 > 10){
+					sprite = Sprite.player_side_1;
+				}
+				else {
+					sprite = Sprite.player_side_2;		
+				}
+			}		
+		}
+		if(dir == 2){
 			sprite = Sprite.player_down;
+			if(walking){		
+					if(animation % 20 > 10){
+						sprite = Sprite.player_down_1;
+					}
+					else {
+						sprite = Sprite.player_down_2;		
+					}
+				
+			}
+		}
 		if(dir == 3){
 			sprite = Sprite.player_side;
-			flip = 1;
+			if(walking){
+				
+				if(animation % 20 > 10){
+					sprite = Sprite.player_side_1;
+				}
+				else {
+					sprite = Sprite.player_side_2;		
+				}
+			
+			}flip = 1;		
 		}
-		screen.renderPlayer(x-(48/2),y-(48/2),sprite, flip);
-		
+		screen.renderPlayer(x-(16/2),y-(16/2),sprite, flip);	
 	}
 }
 

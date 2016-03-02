@@ -11,12 +11,14 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import game.entity.mob.Player;
 import game.graphics.Screen;
 import game.input.Keyboard;
+import game.input.Mouse;
 import game.level.Level;
-import game.level.RandomLevel;
+import game.level.TileCoordinate;
 
 public class GameMain extends Canvas implements Runnable{
 	
@@ -41,24 +43,29 @@ public class GameMain extends Canvas implements Runnable{
 	public GameMain(){
 		Dimension canvasSize = (new Dimension(width*scale,height*scale));
 		setPreferredSize(canvasSize);
-	
-		screen = new Screen(width, height);
-		frame = new JFrame(name);
-		key = new Keyboard();
-		level = new RandomLevel(64,64);
-		player = new Player(key);
+																		
+		screen = new Screen(width, height);								
+		frame = new JFrame(name);										
+		key = new Keyboard();											
+		level = level.spawn;											
+		TileCoordinate playerSpawn = new TileCoordinate(15,12);			
+		player = new Player(playerSpawn.x(),playerSpawn.y(),key);		
+		player.init(level);															
 		
+		Mouse mouse = new Mouse();
 		addKeyListener(key);
-		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(new BorderLayout());					
-		frame.add(this, BorderLayout.CENTER);					
-		frame.pack();											
-		frame.setResizable(false);								
-		frame.setLocationRelativeTo(null);						
-		frame.setVisible(true);									
-	}
-	
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
+																		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);			
+		frame.setLayout(new BorderLayout());							
+		frame.add(this, BorderLayout.CENTER);							
+		frame.pack();													
+		frame.setResizable(false);										
+		frame.setLocationRelativeTo(null);								
+		frame.setVisible(true);											
+	}																	
+																		
 	private Thread thread;
 	
 	public synchronized void start() {								
@@ -125,6 +132,7 @@ public class GameMain extends Canvas implements Runnable{
 			pixels[i] = screen.pixels[i];
 		}
 	}	
+	
 	public void render(){												
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {										
@@ -141,16 +149,16 @@ public class GameMain extends Canvas implements Runnable{
 		for (int i = 0; i< pixels.length; i++ ){
 			pixels[i] = screen.pixels[i];
 		}
-		Graphics g = bs.getDrawGraphics();						
-		
+		Graphics g = bs.getDrawGraphics();
+		g.drawImage(image, 0 ,0, getWidth(), getHeight(), null);						
 		g.setColor(Color.WHITE);						
 		g.setFont(new Font("Verdana",0,50));
-		g.fillRect(0, 0, getWidth(), getHeight());						
-		g.drawImage(image, 0 ,0, getWidth(), getHeight(), null);
-		//g.drawString("X:"+player.x +",Y:" + player.y,350,300);
+		//g.fillRect(Mouse.getX(), Mouse.getY(), 64, 64);						
+		//g.drawString("Button:"+Mouse.getButton(),80,80);
 		g.dispose();											
 		bs.show();												
 	}
+	
 	public static void main(String[]args) {
 		new GameMain().start();	
 	}	
