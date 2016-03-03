@@ -1,0 +1,8 @@
+package game.input;
+
+import java.awt.event.MouseEvent;
+
+
+public class InventoryMouse {
+
+}

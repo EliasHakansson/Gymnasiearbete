@@ -1,0 +1,9 @@
+package game.inventory;
+
+public enum Item {
+	
+	REDBALL;
+	
+	private int itemID;
+
+}

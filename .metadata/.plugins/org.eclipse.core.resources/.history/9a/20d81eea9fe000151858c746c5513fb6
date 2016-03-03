@@ -1,0 +1,10 @@
+package game.entity.projectile;
+
+public class WizardProjectile extends Projectile {
+
+	public WizardProjectile(int x, int y, int dir) {
+		super(x, y, dir);
+		
+	}
+
+}

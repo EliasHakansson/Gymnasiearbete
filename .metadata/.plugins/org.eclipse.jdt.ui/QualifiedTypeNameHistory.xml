@@ -3,4 +3,11 @@
 <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
 <fullyQualifiedTypeName name="game.level.SpawnLevel"/>
 <fullyQualifiedTypeName name="game.level.tile.Spawn_level.SpawnGrassTile"/>
+<fullyQualifiedTypeName name="java.awt.GraphicsEnvironment"/>
+<fullyQualifiedTypeName name="game.input.InventoryMouse"/>
+<fullyQualifiedTypeName name="game.GameMain"/>
+<fullyQualifiedTypeName name="game.entity.Entity"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="game.graphics.Screen"/>
+<fullyQualifiedTypeName name="game.graphics.Sprite"/>
 </qualifiedTypeNameHistroy>

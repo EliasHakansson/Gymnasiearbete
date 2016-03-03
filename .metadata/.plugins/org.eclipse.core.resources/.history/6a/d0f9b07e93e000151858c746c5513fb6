@@ -1,0 +1,16 @@
+package game.inventory;
+
+import java.awt.image.BufferedImage;
+
+public enum Item {
+	
+	RED_BALL(1);
+	
+	private int itemID;
+	private BufferedImage itemImage;
+	private String itemName;
+	
+	private Item(int itemID) {
+	// TODO Auto-generated constructor stub
+}
+}

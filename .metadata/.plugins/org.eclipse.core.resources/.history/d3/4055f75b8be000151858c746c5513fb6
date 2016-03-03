@@ -1,0 +1,10 @@
+package game.entity.mob;
+
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+
+public class PlayerStats extends Player {
+
+
+}

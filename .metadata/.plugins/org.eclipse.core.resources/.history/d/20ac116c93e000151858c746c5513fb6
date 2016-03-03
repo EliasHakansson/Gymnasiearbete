@@ -1,0 +1,14 @@
+package game.inventory;
+
+public enum Item {
+	
+	RED_BALL;
+	
+	private int itemID;
+	private BufferedImage itemImage;
+	private String itemName;
+	
+	private Item(int itemID) {
+	// TODO Auto-generated constructor stub
+}
+}

@@ -1,5 +1,6 @@
 package game.entity.mob;
 
+import game.GameMain;
 import game.graphics.Screen;
 import game.graphics.Sprite;
 import game.input.Keyboard;
@@ -14,8 +15,7 @@ public class Player extends Mob{
 	
 	
 	public Player(Keyboard input){
-		this.input = input;
-		 
+		this.input = input;	 
 	}
 	
 	public Player(int x, int y, Keyboard input){
@@ -27,21 +27,17 @@ public class Player extends Mob{
 	
 	public void tick(){
 		int xa=0, ya=0;
-		if(animation < 8000) 
+		if(animation < 7500) 
 			animation++; 
 		 else animation = 0;
 		if(input.up) ya--;
 		if(input.down) ya++;
 		if(input.left) xa--;
 		if(input.right) xa++;
-		if(Mouse.getButton()==1){
-			shoot(x, y, dir);
-		}
 		if(xa != 0 || ya != 0) {
 			move(xa,ya);
 			walking = true;
-		}
-		else {
+		}else {
 			walking = false;
 		}
 		updateShooting();
@@ -49,8 +45,8 @@ public class Player extends Mob{
 	
 	private void updateShooting() {	
 		if(Mouse.getButton()==1){
-			double dx = Mouse.getX()- 300/2;
-			double dy = Mouse.getY()-(300/16*9)/2;
+			double dx = Mouse.getX()- GameMain.getWindowWidth()/2;
+			double dy = Mouse.getY()- GameMain.getWindowHeight()/2;
 			double dir = Math.atan2(dy, dx);
 			
 			shoot( x, y, dir);
@@ -59,7 +55,7 @@ public class Player extends Mob{
 
 	public void render(Screen screen){
 		int flip = 0;	
-		if(dir == 0){
+		if(Pdir == 0){
 			sprite = Sprite.player_up;
 			if (walking ){
 				if(animation % 20 > 10){
@@ -70,7 +66,7 @@ public class Player extends Mob{
 				}
 			}
 		}
-		if(dir == 1){
+		if(Pdir == 1){
 			sprite = Sprite.player_side;	
 			if (walking ){
 				if(animation % 20 > 10){
@@ -81,19 +77,18 @@ public class Player extends Mob{
 				}
 			}		
 		}
-		if(dir == 2){
+		if(Pdir == 2){
 			sprite = Sprite.player_down;
 			if(walking){		
-					if(animation % 20 > 10){
-						sprite = Sprite.player_down_1;
-					}
-					else {
-						sprite = Sprite.player_down_2;		
-					}
-				
+				if(animation % 20 > 10){
+					sprite = Sprite.player_down_1;
+				}
+				else {
+					sprite = Sprite.player_down_2;		
+				}
 			}
 		}
-		if(dir == 3){
+		if(Pdir == 3){
 			sprite = Sprite.player_side;
 			if(walking){
 				

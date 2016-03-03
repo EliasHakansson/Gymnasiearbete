@@ -2,7 +2,7 @@ package game.graphics;
 
 public class Sprite {
 	
-	final int SIZE;
+	public final int SIZE;
 	private int x,y;
 	public int[] pixels;
 	private SpriteSheet sheet;
@@ -25,11 +25,13 @@ public class Sprite {
 	public static Sprite spawn_flower_1 = new Sprite(16, 3,0, SpriteSheet.spawn_level);
 	public static Sprite spawn_flower_2 = new Sprite(16, 4,0, SpriteSheet.spawn_level);
 	public static Sprite spawn_floor_wood = new Sprite(16, 0,1, SpriteSheet.spawn_level);
-	public static Sprite spawn_wall_stone = new Sprite(16, 3,1, SpriteSheet.spawn_level);
+	public static Sprite spawn_wall_stone = new Sprite(16, 5,2, SpriteSheet.spawn_level);
 	public static Sprite spawn_wall_top_stone = new Sprite(16, 5,1, SpriteSheet.spawn_level);
-	public static Sprite spawn_wall_bottom_stone = new Sprite(16, 3,1, SpriteSheet.spawn_level);
+	public static Sprite spawn_wall_bottom_stone = new Sprite(16, 5,3, SpriteSheet.spawn_level);
 	public static Sprite spawn_wall_side_stone = new Sprite(16, 6,2, SpriteSheet.spawn_level);
 	public static Sprite spawn_wall_topRight_stone = new Sprite(16, 6,1, SpriteSheet.spawn_level);
+	
+	
 
 	//Player Sprites:
 	public static Sprite player_up = new Sprite(16,2,13, SpriteSheet.tiles);
@@ -45,7 +47,8 @@ public class Sprite {
 	public static Sprite player_down_1 = new Sprite(16,0,14, SpriteSheet.tiles);
 	public static Sprite player_down_2 = new Sprite(16,0,15, SpriteSheet.tiles);
 	
-	
+	//Projectile sprites
+	public static Sprite projectile_wizard = new Sprite(16,0,0, SpriteSheet.wizard_projectiles);
 	
 	
 	public Sprite(int size, int x, int y, SpriteSheet sheet){

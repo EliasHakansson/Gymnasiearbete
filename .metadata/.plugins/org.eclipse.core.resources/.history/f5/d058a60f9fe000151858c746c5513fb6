@@ -1,0 +1,7 @@
+package game.entity.projectile;
+
+import game.entity.Entity;
+
+public abstract class Projectile extends Entity {
+
+}
