@@ -24,7 +24,7 @@ public class GameMain extends Canvas implements Runnable{
 
 	private static final int width = 300;					
 	private static final int height = width/16*9;
-	private static final int scale =5;					
+	private static final int scale =3;					
 	public static final String title = "Game";
 	
 	private Thread thread;
@@ -67,6 +67,7 @@ public class GameMain extends Canvas implements Runnable{
 		frame.setVisible(true);											
 	}	
 	
+																		
 	
 	public static int getWindowWidth(){
 		return width*scale;
@@ -161,8 +162,8 @@ public class GameMain extends Canvas implements Runnable{
 		g.drawImage(image, 0 ,0, getWidth(), getHeight(), null);						
 		g.setColor(Color.WHITE);						
 		g.setFont(new Font("Verdana",0,50));
-		g.fillRect(Mouse.getX(), Mouse.getY(), 64, 64);						
-		g.drawString("Button:"+Mouse.getButton(),80,80);
+		//g.fillRect(Mouse.getX(), Mouse.getY(), 64, 64);						
+		//g.drawString("Button:"+Mouse.getButton(),80,80);
 		g.dispose();											
 		bs.show();												
 	}

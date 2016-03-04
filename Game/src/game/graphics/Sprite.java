@@ -28,8 +28,13 @@ public class Sprite {
 	public static Sprite spawn_wall_stone = new Sprite(16, 5,2, SpriteSheet.spawn_level);
 	public static Sprite spawn_wall_top_stone = new Sprite(16, 5,1, SpriteSheet.spawn_level);
 	public static Sprite spawn_wall_bottom_stone = new Sprite(16, 5,3, SpriteSheet.spawn_level);
-	public static Sprite spawn_wall_side_stone = new Sprite(16, 6,2, SpriteSheet.spawn_level);
+	public static Sprite spawn_wall_rightSide_stone = new Sprite(16, 6,2, SpriteSheet.spawn_level);
 	public static Sprite spawn_wall_topRight_stone = new Sprite(16, 6,1, SpriteSheet.spawn_level);
+	public static Sprite spawn_wall_topLeft_stone = new Sprite(16, 4,1, SpriteSheet.spawn_level);
+	public static Sprite spawn_wall_bottomRight_stone = new Sprite(16, 6,4, SpriteSheet.spawn_level);
+	public static Sprite spawn_wall_bottomLeft_stone = new Sprite(16, 4,4, SpriteSheet.spawn_level);
+	public static Sprite spawn_wall_topBottom_stone = new Sprite(16, 5,4, SpriteSheet.spawn_level);
+	public static Sprite spawn_wall_leftSide_stone = new Sprite(16, 4,2, SpriteSheet.spawn_level);
 	
 	
 
