@@ -1,0 +1,52 @@
+package game.entity.mob;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import game.entity.Entity;
+import game.graphics.Screen;
+import game.graphics.Sprite;
+
+public class Particle extends Entity{
+	
+	private List<Particle> particles = new ArrayList<Particle>();
+	private Sprite sprite;
+	
+	private int life;
+	
+	protected double xa,ya, xx, yy;
+	
+	
+	public Particle(int x, int y, int life){
+		this.x = x;
+		this.y = y;
+		this.xx = x;
+		this.yy = y;
+		this.life= life;
+		sprite = Sprite.particle_normal;
+		
+		this.xa = random.nextGaussian();
+		this.ya = random.nextGaussian();
+		
+	}
+	
+	public Particle(int x, int y, int life, int amount){
+		this(x,y,life);
+		particles.add(this);
+		for(int i=0; i < amount -1; i++){
+			particles.add(new Particle(x,y,life));
+		}
+	}
+	
+	public void tick(){
+		this.xx = xa;
+		this.yy = ya;
+	}
+	
+	public void render(Screen screen){
+		screen.renderSprite(xx,yy, sprite, true);
+		
+		
+	}
+
+}

@@ -9,11 +9,13 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.util.Random;
 
 import javax.swing.JFrame;
 
 import game.entity.mob.Player;
 import game.graphics.Screen;
+import game.graphics.Sprite;
 import game.input.Keyboard;
 import game.input.Mouse;
 import game.level.Level;
@@ -24,7 +26,7 @@ public class GameMain extends Canvas implements Runnable{
 
 	private static final int width = 300;					
 	private static final int height = width/16*9;
-	private static final int scale =3;					
+	private static final int scale =5;					
 	public static final String title = "Game";
 	
 	private Thread thread;
@@ -148,12 +150,13 @@ public class GameMain extends Canvas implements Runnable{
 			createBufferStrategy(3);							
 			return;
 		}
+		
 		screen.clear();		
 		int xScroll = player.x-screen.width/2;
 		int yScroll = player.y-screen.height/2;
 		
 		level.render(xScroll,yScroll, screen);
-		player.render(screen);
+		player.render(screen);		
 		
 		for (int i = 0; i< pixels.length; i++ ){
 			pixels[i] = screen.pixels[i];

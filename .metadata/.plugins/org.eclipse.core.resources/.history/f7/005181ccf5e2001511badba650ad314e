@@ -1,0 +1,11 @@
+package game.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Spawner extends Entity{
+	
+	private List<Entity> entities = new ArrayList<Entity>();
+	
+	public SPawner(int x, int y, Entity e, int amount)
+}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import game.entity.Entity;
+import game.entity.particle.Particle;
 import game.entity.projectile.Projectile;
 import game.entity.projectile.WizardProjectile;
 import game.graphics.Sprite;
@@ -31,15 +32,16 @@ public abstract class Mob extends Entity {
 		if (!collision(xa, ya)){
 			y+=ya;
 			x+=xa;
-		}	
+		}
 	}
 	
 	public void tick(){
+		
 	}
 	
 	protected void shoot(int x, int y, double dir){
 		Projectile p = new WizardProjectile(x, y, dir);
-		level.addProjectile(p);
+		level.add(p);
 	}
 	
 	private boolean collision(int xa, int ya){

@@ -1,5 +1,6 @@
 package game.entity.projectile;
 
+import game.entity.Spawner.ParticleSpawner;
 import game.graphics.Screen;
 import game.graphics.Sprite;
 
@@ -10,25 +11,25 @@ public class WizardProjectile extends Projectile {
 	public WizardProjectile(int x, int y, double dir) {
 		super(x, y, dir);
 		range = 150;
-		speed = 3;
+		speed = 4;
 		damage = 20;
-		sprite = Sprite.projectile_wizard;
+		sprite = Sprite.projectile_pirate;
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
 	}
 
 	public void tick(){
-		if(level.tileCollision(x,y, nx, ny,9)){ 
+		if(level.tileCollision((int)(x +nx), (int)(y +ny),8, 4, 4)){ 
+			level.add(new ParticleSpawner((int)x,(int)y, 44,20, level));
 			remove();
+			
 		}
 		move();
 	}
 	
 	protected void move(){
-		if (!level.tileCollision(x,y, nx, ny, 9)){
 			x += nx;
 			y += ny;
-		}	
 		if (distance() > range ){
 			remove();
 		}

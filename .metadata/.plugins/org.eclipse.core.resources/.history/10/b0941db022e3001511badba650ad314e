@@ -1,0 +1,12 @@
+package game.entity.Spawner;
+
+import game.level.Level;
+
+public class particleSpawner extends Spawner {
+
+	public particleSpawner(int x, int y,int life, int amount, Level level) {
+		this.life = life;
+		super(x, y, Type.PARTICLE, amount, level);
+			}
+
+}
