@@ -1,8 +1,0 @@
-package game.entity.mob;
-
-import game.entity.Entity;
-
-public class Particle extends Entity{
-	
-	private List<Particle> particles = new ArrayList<Particles>();
-}

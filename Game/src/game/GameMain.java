@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import game.entity.mob.Player;
 import game.graphics.Screen;
 import game.graphics.Sprite;
+import game.graphics.SpriteSheet;
 import game.input.Keyboard;
 import game.input.Mouse;
 import game.level.Level;
@@ -26,7 +27,7 @@ public class GameMain extends Canvas implements Runnable{
 
 	private static final int width = 300;					
 	private static final int height = width/16*9;
-	private static final int scale =5;					
+	private static final int scale =6;					
 	public static final String title = "Game";
 	
 	private Thread thread;
@@ -50,9 +51,9 @@ public class GameMain extends Canvas implements Runnable{
 		frame = new JFrame(title);										
 		key = new Keyboard();											
 		level = level.spawn;											
-		TileCoordinate playerSpawn = new TileCoordinate(15,12);			
+		TileCoordinate playerSpawn = new TileCoordinate(15,7);			
 		player = new Player(playerSpawn.x(),playerSpawn.y(),key);		
-		player.init(level);															
+		level.add(player);															
 		
 		addKeyListener(key);
 		
@@ -119,11 +120,11 @@ public class GameMain extends Canvas implements Runnable{
 				Thread.sleep(2);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}			
+			}
 			if (shouldRender){
 				frames++;
 				render();
-			}		
+			}
 			if(System.currentTimeMillis()- timer >= 1000){
 				timer +=1000;
 				System.out.println(frames + " fps, " + ticks + " updates/s");
@@ -131,12 +132,11 @@ public class GameMain extends Canvas implements Runnable{
 				ticks=0;
 			}
 		}
-	}	
+	}
 	
 	public void tick(){	
 		tickCount++;
 		key.tick();
-		player.tick();
 		
 		for (int i =0; i <pixels.length; i++){
 			pixels[i] = screen.pixels[i];
@@ -152,11 +152,11 @@ public class GameMain extends Canvas implements Runnable{
 		}
 		
 		screen.clear();		
-		int xScroll = player.x-screen.width/2;
-		int yScroll = player.y-screen.height/2;
+		int xScroll = player.getX() - screen.width / 2;
+		int yScroll = player.getY() - screen.height / 2;
 		
-		level.render(xScroll,yScroll, screen);
-		player.render(screen);		
+		level.render(xScroll,yScroll, screen);		
+		//screen.renderSheet(40,40,SpriteSheet.player_down, false);
 		
 		for (int i = 0; i< pixels.length; i++ ){
 			pixels[i] = screen.pixels[i];

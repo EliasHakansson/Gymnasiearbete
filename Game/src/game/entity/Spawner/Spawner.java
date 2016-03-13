@@ -3,7 +3,7 @@ package game.entity.Spawner;
 import game.entity.Entity;
 import game.level.Level;
 
-public class Spawner extends Entity{
+public abstract class Spawner extends Entity{
 	
 	public enum Type{
 		MOB, PARTICLE;

@@ -1,5 +1,0 @@
-package game.inventory;
-
-public enum Item {
-
-}

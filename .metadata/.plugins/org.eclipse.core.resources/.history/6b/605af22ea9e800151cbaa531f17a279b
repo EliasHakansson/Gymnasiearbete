@@ -1,0 +1,20 @@
+package game.entity.mob;
+
+import game.graphics.Screen;
+
+public class Chaser extends Mob{
+
+	public Chaser(int x, int y){
+		this.x = x *16;
+		this.y = y *16;
+	}
+	
+	public void tick() {
+		
+	}
+
+	public void render(Screen screen) {
+		screen.renderMob(xp, yp, sprite, 0);
+	}
+
+}

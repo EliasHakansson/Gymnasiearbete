@@ -1,0 +1,26 @@
+package game.graphics;
+
+public class AnimatedSprite extends Sprite{
+
+	private int frame = 0;
+	private Sprite sprite;
+	private int rate = 5;
+	
+	public AnimatedSprite(SpriteSheet sheet, int width, int height){
+		super(sheet, width, height);
+	}
+	
+	public void tick(){
+		
+	}
+	
+	public Sprite getSprite(){
+		return sprite;
+	}
+	
+	public void setFrameRate(int frames){
+		
+	}
+
+}
+

@@ -6,7 +6,7 @@ public class Sprite {
 	private int x,y;
 	private int width, height;
 	public int[] pixels;
-	private SpriteSheet sheet;
+	protected SpriteSheet sheet;
 	
 	public static Sprite grass_1 = new Sprite(16, 0,9, SpriteSheet.tiles);
 	public static Sprite grass_2 = new Sprite(16, 1,9, SpriteSheet.tiles);
@@ -36,12 +36,10 @@ public class Sprite {
 	public static Sprite spawn_wall_bottomLeft_stone = new Sprite(16, 4,4, SpriteSheet.spawn_level);
 	public static Sprite spawn_wall_topBottom_stone = new Sprite(16, 5,4, SpriteSheet.spawn_level);
 	public static Sprite spawn_wall_leftSide_stone = new Sprite(16, 4,2, SpriteSheet.spawn_level);
-	
-	
 
 	//Player Sprites:
-	public static Sprite player_up = new Sprite(16,2,13, SpriteSheet.tiles);
-	public static Sprite player_side = new Sprite(16,1,13, SpriteSheet.tiles);
+	public static Sprite player_forward = new Sprite(16,2,13, SpriteSheet.tiles);
+	public static Sprite player_asd = new Sprite(16,1,13, SpriteSheet.tiles);
 	public static Sprite player_down = new Sprite(16,0,13, SpriteSheet.tiles);
 	
 	public static Sprite player_up_1 = new Sprite(16,2,14, SpriteSheet.tiles);
@@ -53,12 +51,21 @@ public class Sprite {
 	public static Sprite player_down_1 = new Sprite(16,0,14, SpriteSheet.tiles);
 	public static Sprite player_down_2 = new Sprite(16,0,15, SpriteSheet.tiles);
 	
+	public static Sprite dummy = new Sprite (16,0, 0, SpriteSheet.dummy_down);
 	//Projectile sprites
 	public static Sprite projectile_pirate = new Sprite(16,0,0, SpriteSheet.pirate_projectiles);
 	
 	// Particles
-	public static Sprite particle_normal = new Sprite(3,0xAAAAAA);
+	public static Sprite particle_normal = new Sprite(3,0xFF808080);
+	public static Sprite square = new Sprite (2, 0xFF0000);
 	
+	
+	protected Sprite(SpriteSheet sheet, int width, int height){	
+		SIZE = width == height ?  width : -1;
+		this.width = width;
+		this.height= height;
+		this.sheet = sheet;
+	}
 	
 	public Sprite(int size, int x, int y, SpriteSheet sheet){
 		SIZE = size;
@@ -83,11 +90,17 @@ public class Sprite {
 		SIZE = size;
 		this.width = size;
 		this.height = size;
-		
 		pixels = new int[SIZE*SIZE];
 		setColour(colour);
 	}
 	
+	public Sprite(int[] pixels, int width, int height) {
+		this.width = width;
+		this.height = height;
+		SIZE = width == height ?  width : -1;
+		this.pixels = pixels;
+	}
+
 	private void setColour(int colour) {
 		for (int i = 0; i < width*height; i++ ){
 			pixels[i] = colour;	
@@ -103,9 +116,9 @@ public class Sprite {
 	}
 
 	private void load(){
-		for (int y = 0; y < SIZE; y++ ){
-			for ( int x = 0; x < SIZE; x++){
-				pixels[x+y*SIZE]= sheet.pixels[(x+this.x)+(y+this.y) * sheet.SIZE];
+		for (int y = 0; y < height; y++ ){
+			for ( int x = 0; x < width; x++){
+				pixels[x+y*width]= sheet.pixels[(x+this.x)+(y+this.y) * sheet.WIDTH];
 			}
 		}
 	}

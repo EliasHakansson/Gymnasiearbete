@@ -1,10 +1,15 @@
 package game.entity.mob;
 
+import java.util.List;
+
 import game.GameMain;
+import game.entity.Entity;
 import game.entity.projectile.Projectile;
 import game.entity.projectile.WizardProjectile;
+import game.graphics.AnimatedSprite;
 import game.graphics.Screen;
 import game.graphics.Sprite;
+import game.graphics.SpriteSheet;
 import game.input.Keyboard;
 import game.input.Mouse;
 
@@ -14,33 +19,48 @@ public class Player extends Mob{
 	private Sprite sprite ;
 	private int animation = 0;
 	private boolean walking = false;
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 16,16,3);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 16,16,3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 16,16,3);
+	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 16,16,3);
+	
+	private AnimatedSprite animSprite = down;
 	
 	private int fireRate = 0;
 	
 	public Player(Keyboard input){
-		this.input = input;	 
+		this.input = input;	
+		sprite = Sprite.player_forward;
+		animSprite = down;
 	}
 	
 	public Player(int x, int y, Keyboard input){
 		this.x = x;
 		this.y = y;
 		this.input = input;
-		sprite = Sprite.player_up;
+		sprite = Sprite.player_forward;
 		fireRate = WizardProjectile.FIRE_RATE;
 	}
 	
 	public void tick(){
-		if (fireRate > 0) {
-			fireRate--;
+		if (walking) animSprite.tick();	
+		else animSprite.setFrame(0);
+		if (fireRate > 0) fireRate--;
+		int xa = 0, ya = 0;
+		if (input.up) {
+			animSprite = up;
+			ya--;	
+		} else if(input.down) {
+			animSprite = down;
+			ya++;	
 		}
-		int xa=0, ya=0;
-		if(animation < 7500) 
-			animation++; 
-		 else animation = 0;
-		if(input.up) ya--;
-		if(input.down) ya++;
-		if(input.left) xa--;
-		if(input.right) xa++;
+		if(input.left) {
+			animSprite = left;
+			xa--;
+		}else if(input.right){
+			animSprite = right;
+			xa++;	
+		}
 		if(xa != 0 || ya != 0) {
 			move(xa,ya);
 			walking = true;
@@ -58,7 +78,6 @@ public class Player extends Mob{
 				level.getProjectiles().remove(i);
 			}
 		}
-		
 	}
 
 	private void updateShooting() {	
@@ -73,54 +92,9 @@ public class Player extends Mob{
 	}
 
 	public void render(Screen screen){
-		int flip = 0;	
-		if(Pdir == 0){
-			sprite = Sprite.player_up;
-			if (walking ){
-				if(animation % 20 > 10){
-					sprite = Sprite.player_up_1;
-				}
-				else {
-					sprite = Sprite.player_up_2;		
-				}
-			}
-		}
-		if(Pdir == 1){
-			sprite = Sprite.player_side;	
-			if (walking ){
-				if(animation % 20 > 10){
-					sprite = Sprite.player_side_1;
-				}
-				else {
-					sprite = Sprite.player_side_2;		
-				}
-			}		
-		}
-		if(Pdir == 2){
-			sprite = Sprite.player_down;
-			if(walking){		
-				if(animation % 20 > 10){
-					sprite = Sprite.player_down_1;
-				}
-				else {
-					sprite = Sprite.player_down_2;		
-				}
-			}
-		}
-		if(Pdir == 3){
-			sprite = Sprite.player_side;
-			if(walking){
-				
-				if(animation % 20 > 10){
-					sprite = Sprite.player_side_1;
-				}
-				else {
-					sprite = Sprite.player_side_2;		
-				}
-			
-			}flip = 1;		
-		}
-		screen.renderPlayer(x-(16/2),y-(16/2),sprite, flip);	
+		int flip = 0;
+		sprite = animSprite.getSprite();	
+		screen.renderMob(x-8, y-8, sprite, flip);
 	}
 }
 

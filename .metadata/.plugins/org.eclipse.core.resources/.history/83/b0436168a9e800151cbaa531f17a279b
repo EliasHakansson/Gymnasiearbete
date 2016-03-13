@@ -1,0 +1,48 @@
+package game.entity.mob;
+
+import game.entity.mob.Mob.Direction;
+import game.graphics.Screen;
+
+public class Chaser extends Mob{
+
+	public Chaser(int x, int y){
+		this.x = x *16;
+		this.y = y *16;
+	}
+	
+	public void tick() {
+		if (walking){
+			animSprite.tick();
+		}else {
+			animSprite.setFrame(0);
+		}
+		
+		if (ya < 0) {
+			animSprite = up;
+			dir = Direction.UP;
+		} else if(ya > 0) {
+			animSprite = down;
+			dir = Direction.DOWN;	
+		}
+		if(xa < 0) {
+			animSprite = left;
+			dir = Direction.LEFT;
+		}else if(xa > 0){
+			animSprite = right;
+			dir = Direction.RIGHT;	
+		}
+		if(xa != 0 || ya != 0) {
+			move(xa,ya);
+			walking = true;
+		}else {
+			walking = false;
+		}
+	}
+
+	public void render(Screen screen) {
+		sprite = animSprite.getSprite();
+		screen.renderMob(x, y, sprite, 0);
+	
+	}
+
+}

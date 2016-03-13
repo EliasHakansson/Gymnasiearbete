@@ -1,6 +1,0 @@
-package game.entity.mob;
-
-public class Particle extends Entity{
-	
-
-}

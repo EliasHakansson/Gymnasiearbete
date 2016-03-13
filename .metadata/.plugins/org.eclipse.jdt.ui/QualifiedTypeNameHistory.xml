@@ -8,6 +8,7 @@
 <fullyQualifiedTypeName name="game.GameMain"/>
 <fullyQualifiedTypeName name="game.entity.Entity"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="game.graphics.Screen"/>
 <fullyQualifiedTypeName name="game.graphics.Sprite"/>
+<fullyQualifiedTypeName name="game.graphics.SpriteSheet"/>
+<fullyQualifiedTypeName name="game.graphics.Screen"/>
 </qualifiedTypeNameHistroy>

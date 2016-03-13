@@ -2,6 +2,8 @@ package game.graphics;
 
 import java.util.Random;
 
+import game.entity.mob.Chaser;
+import game.entity.mob.Mob;
 import game.entity.projectile.Projectile;
 import game.level.tile.Tile;
 
@@ -31,6 +33,22 @@ public class Screen {
 			pixels[i]= 0;					 					
 		}
 	}	
+	public void renderSheet(int xp, int yp, SpriteSheet sheet, boolean fixed){
+		if (fixed){
+			xp -= xOffset;
+			yp -= yOffset;
+		}
+		for(int y = 0; y < sheet.HEIGHT; y++){
+			int ya = y + yp;
+			for(int x = 0; x < sheet.WIDTH; x++){
+				int xa = x + xp;
+				if (xa < 0 || xa >= width || ya < 0 || ya >= height){
+					continue;
+				}
+				pixels[xa + ya * width ] = sheet.pixels[x + y * sheet.WIDTH];
+			}
+		}
+	}
 	
 	public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed){
 		if (fixed){
@@ -89,7 +107,22 @@ public class Screen {
 		}
 	}
 	
-	public void renderPlayer(int xp, int yp, Sprite sprite, int flip){
+	public void renderMob(int xp, int yp, Mob mob){
+		xp -= xOffset;
+		yp -= yOffset;
+		for(int y = 0; y < 16; y++){
+			int ya = y + yp;
+			int ys = y;
+			for(int x = 0; x < 16; x++){
+				int xa = x + xp;
+				int xs = x;	
+				if (xa < - 16 || xa >= width || ya < 0 || ya >= height) break;
+				if (xa < 0) xa = 0;
+			}
+		}
+	}
+	
+	public void renderMob(int xp, int yp, Sprite sprite, int flip){
 		xp -= xOffset;
 		yp -= yOffset;
 		for(int y = 0; y < 16; y++){
