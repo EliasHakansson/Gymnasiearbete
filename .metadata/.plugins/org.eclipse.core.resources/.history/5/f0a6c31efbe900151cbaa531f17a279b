@@ -1,0 +1,10 @@
+package game.level;
+
+import game.util.Vector2i;
+
+public class Node {
+
+	public Vector2i tile;
+	public Node parent;
+	
+}

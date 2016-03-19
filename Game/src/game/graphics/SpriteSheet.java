@@ -16,17 +16,17 @@ public class SpriteSheet {
 	public static SpriteSheet pirate_projectiles = new SpriteSheet("/textures/sheets/projectiles/pirate_projectiles.png", 32);
 	
 	public static SpriteSheet player = new SpriteSheet("/textures/sheets/Sprites_player.png", 64,48);
-	public static SpriteSheet player_down = new SpriteSheet(player, 0,0,1,3,16);
-	public static SpriteSheet player_up = new SpriteSheet(player, 1,0,1,3,16);
-	public static SpriteSheet player_right = new SpriteSheet(player, 2,0,1,3,16);
-	public static SpriteSheet player_left = new SpriteSheet(player, 3,0,1,3,16);
+	public static SpriteSheet player_down = new SpriteSheet(player, 0,0,1,3,16);	//Spelare vänd nedåt, samt animationer nedåt
+	public static SpriteSheet player_up = new SpriteSheet(player, 1,0,1,3,16);		//Spelare vänd uppdåt, samt animationer uppåt
+	public static SpriteSheet player_right = new SpriteSheet(player, 2,0,1,3,16);	//Spelare vänd åt höger, samt animationer åt höger
+	public static SpriteSheet player_left = new SpriteSheet(player, 3,0,1,3,16);	//Spelare vänd åt vänster, samt animationer åt vänster
 	
 	
-	public static SpriteSheet dummy = new SpriteSheet("/textures/sheets/Dummy.png", 64,48);
-	public static SpriteSheet dummy_down = new SpriteSheet(dummy, 0,0,1,3,16);
-	public static SpriteSheet dummy_up = new SpriteSheet(dummy, 1,0,1,3,16);
-	public static SpriteSheet dummy_right = new SpriteSheet(dummy, 2,0,1,3,16);
-	public static SpriteSheet dummy_left = new SpriteSheet(dummy, 3,0,1,3,16);
+	public static SpriteSheet dummy = new SpriteSheet("/textures/sheets/Dummy.png", 64,48);		//Som spelare
+	public static SpriteSheet dummy_down = new SpriteSheet(dummy, 0,0,1,3,16);					//
+	public static SpriteSheet dummy_up = new SpriteSheet(dummy, 1,0,1,3,16);					//
+	public static SpriteSheet dummy_right = new SpriteSheet(dummy, 2,0,1,3,16);					//
+	public static SpriteSheet dummy_left = new SpriteSheet(dummy, 3,0,1,3,16);					//
 	
 	
 	

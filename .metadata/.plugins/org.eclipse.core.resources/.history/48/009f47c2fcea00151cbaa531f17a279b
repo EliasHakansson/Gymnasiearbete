@@ -1,0 +1,13 @@
+package game.util;
+
+public class Debug {
+	
+	private Debug(){
+		
+	}
+	
+	public static void drawRect(Screen screen, int x, int y, int width, int height, int boolean fixed){
+		
+	}
+
+}

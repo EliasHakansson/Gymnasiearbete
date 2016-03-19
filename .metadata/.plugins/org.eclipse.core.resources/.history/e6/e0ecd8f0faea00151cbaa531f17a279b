@@ -1,0 +1,11 @@
+package game.entity;
+
+import game.graphics.Screen;
+import game.graphics.Sprite;
+import game.level.tile.Tile;
+
+public class TreeTop extends Entity{
+
+
+	
+}

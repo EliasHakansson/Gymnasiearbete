@@ -30,6 +30,8 @@ public class Particle extends Entity{
 		
 	}
 	
+	
+	
 	public void tick(){
 		time++;
 		if (time >= 8000) time=0;

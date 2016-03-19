@@ -8,7 +8,6 @@ import game.level.tile.Spawn_level.SpawnWaterTile;
 
 public class Tile {
 	
-	public int x,y;
 	public Sprite sprite;
 	
 	public static Tile grass_1        	= new GrassTile(Sprite.grass_1);

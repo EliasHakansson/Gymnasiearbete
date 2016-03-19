@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 
 import game.entity.mob.Chaser;
 import game.entity.mob.Dummy;
+import game.entity.mob.Shooter;
+import game.entity.mob.Star;
 
 
 public class SpawnLevel extends Level{
@@ -30,15 +32,17 @@ public class SpawnLevel extends Level{
 			System.out.println("Could not load Level file!");
 		}
 		Random random = new Random();
-		for (int i = 0; i < 1; i++ ) {	
-			add(new Chaser(15 ,8));	
-		}
+		/*for (int i = 0; i < 1; i++ ) {	
+			add(new Chaser(10 ,8));	
+		}*/
 		for (int i = 0; i <5; i++){
+			add (new Shooter(8, 5));
 			add(new Dummy(random.nextInt(15)+10 ,random.nextInt(5)+10));
 		}
+		add(new Star(10,5));
 		
 	}
-	protected void generateLevel(){
+	protected void generateLevel(){	
 		for (int y = 0; y < 64; y++){
 			for (int x = 0; x < 64; x++){
 				getTile(x,y);

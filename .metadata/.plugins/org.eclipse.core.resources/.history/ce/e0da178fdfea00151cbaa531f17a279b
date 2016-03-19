@@ -1,0 +1,23 @@
+package game.entity.mob;
+
+import game.graphics.Screen;
+import game.graphics.Sprite;
+
+public class Shooter extends Mob{
+
+	public Shooter(int x, int y){
+		this.x = x * 16;
+		this.y = y * 16;
+		sprite = Sprite.dummy;
+	}
+	
+	public void tick() {	
+		
+	}
+
+	
+	public void render(Screen screen) {	
+		screen.renderMob(x-8, y-8, sprite, 0);
+	}
+
+}
