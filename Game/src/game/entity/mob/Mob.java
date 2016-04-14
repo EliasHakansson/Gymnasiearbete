@@ -1,14 +1,18 @@
 package game.entity.mob;
 
+import java.util.List;
+
 import game.entity.Entity;
 import game.entity.projectile.EnemyPirateProjectile;
 import game.entity.projectile.Projectile;
 import game.entity.projectile.WizardProjectile;
 import game.graphics.Screen;
+import game.level.Node;
 
 public abstract class Mob extends Entity {
 	
 
+	protected List<Node> path = null;
 	protected boolean moving = false;
 	protected boolean walking = false;
 	
@@ -36,6 +40,7 @@ public abstract class Mob extends Entity {
 		}
 	}
 	
+	
 	public abstract void tick();
 	
 	public abstract void render(Screen screen);
@@ -53,8 +58,8 @@ public abstract class Mob extends Entity {
 	private boolean collision(double xa, double ya){
 		boolean solid = false;
 		for(int c = 0; c < 4; c++){
-			double xt =((x + xa) - c % 2 * 10) / 16;
-			double yt =((y + ya) - c /2 * 10 ) / 16;
+			double xt =((x + xa) - c % 2 * 10 -4) / 16;
+			double yt =((y + ya) - c /2 * 10 + 2) / 16;
 			int ix=(int)Math.ceil(xt);
 			int iy=(int) Math.ceil(yt);
 			if(c % 2 == 0) ix =(int) Math.floor(xt);

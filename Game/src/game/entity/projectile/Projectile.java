@@ -14,6 +14,8 @@ public abstract class Projectile extends Entity {
 	protected double nx, ny;
 	protected double distance;
 	protected double speed, range, damage;
+	public static boolean wallCollision = false;
+	public static boolean mobCollision = false;
 	
 	protected final Random random = new Random();
 	

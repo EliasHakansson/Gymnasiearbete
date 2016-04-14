@@ -73,6 +73,9 @@ public class Shooter extends Mob{
 		
 	}
 	private void updateShooting(){
+		
+		
+		
 		if( fireRate <= 0){
 			Player p = level.getClientPlayer();
 		
@@ -81,10 +84,8 @@ public class Shooter extends Mob{
 			double dir = Math.atan2(dy, dx);
 			
 			pirateShoot(x, y, dir);
-			fireRate = EnemyPirateProjectile.FIRE_RATE * 2;
-			
+			fireRate = EnemyPirateProjectile.FIRE_RATE * 2;	
 		}	
-		
 	}
 	
 	public void render(Screen screen) {	

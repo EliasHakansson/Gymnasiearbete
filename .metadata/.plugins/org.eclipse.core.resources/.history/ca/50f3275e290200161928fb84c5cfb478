@@ -1,0 +1,6 @@
+package game.graphics.UI;
+
+public class UIComponent {
+
+	public voud tick();
+}

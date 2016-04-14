@@ -20,7 +20,7 @@ public class Star extends Mob{
 	
 	private int xa = 0;
 	private int ya = 0;
-	private List<Node> path = null;
+	public List<Node> path = null;
 	private int time = 0;
 	
 	public Star(int x, int y){

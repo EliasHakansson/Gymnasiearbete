@@ -1,38 +1,47 @@
 package game.entity.mob;
 
-import java.util.List;
-
 import game.GameMain;
-import game.entity.Entity;
 import game.entity.projectile.Projectile;
 import game.entity.projectile.WizardProjectile;
 import game.graphics.AnimatedSprite;
 import game.graphics.Screen;
 import game.graphics.Sprite;
 import game.graphics.SpriteSheet;
+import game.graphics.UI.UIComponent;
+import game.graphics.UI.UIManager;
+import game.graphics.UI.UIPanel;
 import game.input.Keyboard;
 import game.input.Mouse;
+import game.util.Vector2i;
 
 public class Player extends Mob{
 
+	public static int health = 100;
+	
 	private Keyboard input;
 	private Sprite sprite ;
-	private int animation = 0;
 	private boolean walking = false;
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 16,16,3);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 16,16,3);
 	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 16,16,3);
 	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 16,16,3);
 	
+	
 	private AnimatedSprite animSprite = down;
 	
 	private int fireRate = 0;
 	
+	private UIManager ui;
+	
+	
 	public Player(Keyboard input){
 		this.input = input;	
 		sprite = Sprite.player_forward;
-		animSprite = down;
+		animSprite = down;				
 	}
+	
+	
+	
 	
 	public Player(int x, int y, Keyboard input){
 		this.x = x;
@@ -40,6 +49,9 @@ public class Player extends Mob{
 		this.input = input;
 		sprite = Sprite.player_forward;
 		fireRate = WizardProjectile.FIRE_RATE;
+		ui = GameMain.getUIManager();
+		UIPanel panel = new UIPanel(new Vector2i(20,140));
+		ui.addPanel(panel);
 	}
 	
 	public void tick(){
@@ -66,6 +78,9 @@ public class Player extends Mob{
 			walking = true;
 		}else {
 			walking = false;
+		}
+		if (health <= 0){
+			System.out.println("Dead");
 		}
 		clear();
 		updateShooting();

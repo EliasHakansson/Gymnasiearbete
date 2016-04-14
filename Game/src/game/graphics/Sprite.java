@@ -17,15 +17,18 @@ public class Sprite {
 	public static Sprite floor_wood = new Sprite(16, 7,9, SpriteSheet.tiles);
 	public static Sprite wall_top_stone = new Sprite(16, 6,9, SpriteSheet.tiles);
 	
+	
 	public static Sprite voidSprite = new Sprite(16,0);
 	
 	//Spawn level Sprites:
 	public static Sprite spawn_grass_1 = new Sprite(16,0,0,SpriteSheet.spawn_level);
-	public static Sprite spawn_grass_2 = new Sprite(16, 1,0, SpriteSheet.spawn_level);
-	public static Sprite spawn_water = new Sprite(16, 2,0, SpriteSheet.spawn_level);	
+	public static Sprite spawn_grass_2 = new Sprite(16, 1,0, SpriteSheet.spawn_level);	
 	public static Sprite spawn_flower_1 = new Sprite(16, 3,0, SpriteSheet.spawn_level);
-	public static Sprite spawn_flower_2 = new Sprite(16, 4,0, SpriteSheet.spawn_level);
+	public static Sprite spawn_flower_2 = new Sprite(16, 2,0, SpriteSheet.spawn_level);
+	public static Sprite spawn_stone_grass = new Sprite(16, 4,0, SpriteSheet.spawn_level);
+	
 	public static Sprite spawn_floor_wood = new Sprite(16, 0,1, SpriteSheet.spawn_level);
+	
 	public static Sprite spawn_wall_stone = new Sprite(16, 5,2, SpriteSheet.spawn_level);
 	public static Sprite spawn_wall_top_stone = new Sprite(16, 5,1, SpriteSheet.spawn_level);
 	public static Sprite spawn_wall_bottom_stone = new Sprite(16, 5,3, SpriteSheet.spawn_level);
@@ -36,10 +39,21 @@ public class Sprite {
 	public static Sprite spawn_wall_bottomLeft_stone = new Sprite(16, 4,4, SpriteSheet.spawn_level);
 	public static Sprite spawn_wall_topBottom_stone = new Sprite(16, 5,4, SpriteSheet.spawn_level);
 	public static Sprite spawn_wall_leftSide_stone = new Sprite(16, 4,2, SpriteSheet.spawn_level);
+	
+	public static Sprite spawn_water = new Sprite(16, 2,5, SpriteSheet.spawn_level);
+	public static Sprite spawn_water_edge_left = new Sprite(16, 3,5, SpriteSheet.spawn_level);
+	public static Sprite spawn_water_edge_right = new Sprite(16, 1,5, SpriteSheet.spawn_level);
+	public static Sprite spawn_water_edge_top	 = new Sprite(16, 2,4, SpriteSheet.spawn_level);
+	public static Sprite spawn_water_edge_bottom = new Sprite(16, 2,6, SpriteSheet.spawn_level);
+	public static Sprite spawn_water_edge_bottom_right = new Sprite(16, 3,6, SpriteSheet.spawn_level);
+	public static Sprite spawn_water_edge_bottom_left = new Sprite(16, 1,6, SpriteSheet.spawn_level);
+	public static Sprite spawn_water_edge_top_right = new Sprite(16, 3,4, SpriteSheet.spawn_level);
+	public static Sprite spawn_water_edge_top_left = new Sprite(16, 1,4, SpriteSheet.spawn_level);
+	
 
 	//Player Sprites:
 	public static Sprite player_forward = new Sprite(16,2,13, SpriteSheet.tiles);
-	public static Sprite player_asd = new Sprite(16,1,13, SpriteSheet.tiles);
+	public static Sprite player_side = new Sprite(16,1,13, SpriteSheet.tiles);
 	public static Sprite player_down = new Sprite(16,0,13, SpriteSheet.tiles);
 	
 	public static Sprite player_up_1 = new Sprite(16,2,14, SpriteSheet.tiles);
@@ -57,8 +71,8 @@ public class Sprite {
 	public static Sprite projectile_arrow = new Sprite(16,1,0, SpriteSheet.pirate_projectiles);
 	
 	// Particles
-	public static Sprite particle_normal = new Sprite(3,0xFF808080);
-	public static Sprite square = new Sprite (2, 0xFF0000);
+	public static Sprite particle_wall = new Sprite(2,0xFF3F3F3F);
+	public static Sprite particle_mob = new Sprite(1,0xFF7F0000);
 	
 	
 	protected Sprite(SpriteSheet sheet, int width, int height){	

@@ -6,8 +6,6 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import game.entity.mob.Chaser;
-import game.entity.mob.Dummy;
 import game.entity.mob.Shooter;
 import game.entity.mob.Star;
 
@@ -35,16 +33,14 @@ public class SpawnLevel extends Level{
 		/*for (int i = 0; i < 1; i++ ) {	
 			add(new Chaser(10 ,8));	
 		}*/
-		for (int i = 0; i <5; i++){
-			add (new Shooter(8, 5));
-			add(new Dummy(random.nextInt(15)+10 ,random.nextInt(5)+10));
+		for (int i = 0; i <50; i++){
+			add (new Shooter(random.nextInt(100) +10 , random.nextInt(38) + 5));
 		}
-		add(new Star(10,5));
 		
 	}
 	protected void generateLevel(){	
-		for (int y = 0; y < 64; y++){
-			for (int x = 0; x < 64; x++){
+		for (int y = 0; y < 100; y++){
+			for (int x = 0; x < 200; x++){
 				getTile(x,y);
 			}
 			tile_size = 16;

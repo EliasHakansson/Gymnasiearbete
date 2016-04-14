@@ -1,0 +1,24 @@
+package game.graphics.UI;
+
+import game.util.Vector2i;
+
+public class UIComponent {
+
+	public Vector2i position, offSet;
+	public int backgroundColor;
+	
+	public UIComponent(Vector2i position){
+		this.position = position;
+	}
+	
+	
+	
+	public void tick(){
+		
+	}
+	
+	public void render(){
+		
+	}
+	
+}

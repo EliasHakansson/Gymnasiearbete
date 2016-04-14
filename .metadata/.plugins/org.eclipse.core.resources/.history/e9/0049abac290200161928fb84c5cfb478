@@ -1,0 +1,24 @@
+package game.graphics.UI;
+
+import game.util.Vector2i;
+
+public class UIComponent {
+
+	private Vector2i position;
+	private 
+	
+	public UIComponent(Vector2i position){
+		
+	}
+	
+	
+	
+	public void tick(){
+		
+	}
+	
+	public void render(){
+		
+	}
+	
+}

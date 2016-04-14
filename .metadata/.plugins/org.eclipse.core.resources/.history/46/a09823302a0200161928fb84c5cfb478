@@ -1,0 +1,16 @@
+package game.graphics.UI;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import game.util.Vector2i;
+
+public class UIPanel {
+
+	private List<UIComponent> panels = new ArrayList<UIComponent>();
+	private Vector2i position;
+	
+	
+
+
+}

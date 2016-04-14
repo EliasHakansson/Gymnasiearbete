@@ -1,0 +1,23 @@
+package game.graphics.UI;
+
+import game.graphics.Screen;
+
+public class UIManager {
+
+	private list<UIPanel> panels = new ArrayList<UIPanel>
+	
+	public UIManager(){
+		
+	}
+	
+	
+	public void tick() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void render(Screen screen) {
+		screen.drawRect(50, 50, 20, 20, 0xffff00ff, false);	
+	}
+
+}

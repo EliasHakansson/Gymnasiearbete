@@ -1,0 +1,10 @@
+package game.graphics.UI;
+
+public class UIManager {
+
+	public void tick() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

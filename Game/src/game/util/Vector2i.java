@@ -2,7 +2,8 @@ package game.util;
 
 public class Vector2i {
 	
-	private int x, y;
+	public int x;
+	public int y;
 	
 	public Vector2i(){
 		set(0,0);

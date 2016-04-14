@@ -1,0 +1,29 @@
+package game.graphics.UI;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import game.graphics.Screen;
+
+public class UIManager {
+
+	private List<UIPanel> panels = new ArrayList<UIPanel>();
+	
+	
+	public UIManager(){
+		
+	}
+	
+	
+	public void tick() {
+		for (UIPanel panel : panels){
+			panel.tick();
+		}
+		
+	}
+
+	public void render(Screen screen) {
+		screen.drawRect(50, 50, 20, 20, 0xffff00ff, false);	
+	}
+
+}

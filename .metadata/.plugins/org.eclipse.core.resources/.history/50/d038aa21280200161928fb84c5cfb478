@@ -1,0 +1,22 @@
+package game.graphics.UI;
+
+import game.graphics.Screen;
+
+public class UIManager {
+
+	public UIManager(){
+		
+	}
+	
+	
+	public void tick() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void render(Screen screen) {
+		screen.drawRect(50, 50, 200, 200, 0xffffooff, fixed);
+		
+	}
+
+}

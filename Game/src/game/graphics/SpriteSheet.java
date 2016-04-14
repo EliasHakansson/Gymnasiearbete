@@ -21,6 +21,7 @@ public class SpriteSheet {
 	public static SpriteSheet player_right = new SpriteSheet(player, 2,0,1,3,16);	//Spelare vänd åt höger, samt animationer åt höger
 	public static SpriteSheet player_left = new SpriteSheet(player, 3,0,1,3,16);	//Spelare vänd åt vänster, samt animationer åt vänster
 	
+	public static SpriteSheet water = new SpriteSheet("/textures/sheets/water.png", 64,48);
 	
 	public static SpriteSheet dummy = new SpriteSheet("/textures/sheets/Dummy.png", 64,48);		//Som spelare
 	public static SpriteSheet dummy_down = new SpriteSheet(dummy, 0,0,1,3,16);					//

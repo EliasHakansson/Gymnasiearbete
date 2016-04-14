@@ -11,4 +11,8 @@ public class VoidTile extends Tile {
 	public void render(int x, int y, Screen screen){	
 		screen.renderTile(x*16, y*16, this);
 	}
+	public boolean solid(){
+		wall = false;
+		return true;
+	}
 }

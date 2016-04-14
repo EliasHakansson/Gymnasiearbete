@@ -1,6 +1,7 @@
 package game.entity.particle;
 
 import game.entity.Entity;
+import game.entity.projectile.EnemyPirateProjectile;
 import game.graphics.Screen;
 import game.graphics.Sprite;
 
@@ -11,9 +12,7 @@ public class Particle extends Entity{
 	private int life;
 	private int time = 0;
 	
-	protected double xa, ya, za, xx, yy, zz;
-	
-	
+	protected double xa, ya, za, xx, yy, zz;	
 	
 	public Particle(int x, int y, int life){
 		System.out.println("Particlelife: "+life);
@@ -22,15 +21,18 @@ public class Particle extends Entity{
 		this.xx = x;
 		this.yy = y;
 		this.life= life + (random.nextInt(20)-10);
-		sprite = Sprite.particle_normal;
+		
+		if (EnemyPirateProjectile.mobCollision){
+			sprite = Sprite.particle_mob;
+		}
+		if (EnemyPirateProjectile.wallCollision){
+			sprite = Sprite.particle_wall;
+		}
 		
 		this.xa = random.nextGaussian();
 		this.ya = random.nextGaussian();
-		this.zz = random.nextFloat()+2.0;
-		
-	}
-	
-	
+		this.zz = random.nextFloat()+2.0;	
+	}	
 	
 	public void tick(){
 		time++;
@@ -47,7 +49,6 @@ public class Particle extends Entity{
 			ya *= 0.4;
 		}
 		move((xx+xa),(yy+ya)+(zz+za));
-		
 	}
 	
 	private void move(double x, double y) {
@@ -60,6 +61,7 @@ public class Particle extends Entity{
 		this.yy += ya;
 		this.zz += za;
 	}
+	
 	public boolean collision(double x, double y){
 		boolean solid = false;
 		for(int c = 0; c < 4; c++){

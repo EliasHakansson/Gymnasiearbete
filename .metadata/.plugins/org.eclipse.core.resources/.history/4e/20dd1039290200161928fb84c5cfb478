@@ -1,0 +1,8 @@
+package game.graphics.UI;
+
+import java.util.ArrayList;
+
+public class UIPanel {
+
+	private list<UIPanel> panels = new ArrayList<UIPanel>();
+}
