@@ -7,7 +7,7 @@ import game.graphics.AnimatedSprite;
 import game.graphics.Screen;
 import game.graphics.Sprite;
 import game.graphics.SpriteSheet;
-import game.graphics.UI.UIComponent;
+import game.graphics.UI.HealthBar;
 import game.graphics.UI.UIManager;
 import game.graphics.UI.UIPanel;
 import game.input.Keyboard;
@@ -32,6 +32,7 @@ public class Player extends Mob{
 	private int fireRate = 0;
 	
 	private UIManager ui;
+	private HealthBar healthBar;
 	
 	
 	public Player(Keyboard input){
@@ -50,14 +51,28 @@ public class Player extends Mob{
 		sprite = Sprite.player_forward;
 		fireRate = WizardProjectile.FIRE_RATE;
 		ui = GameMain.getUIManager();
-		UIPanel panel = new UIPanel(new Vector2i(20,140));
+		UIPanel panel = new UIPanel(new Vector2i((230) * GameMain.scale ,0 * GameMain.scale),
+									new Vector2i(70 * GameMain.scale, (300/16*9 +10)* GameMain.scale));
 		ui.addPanel(panel);
+		
+		healthBar = new HealthBar(new Vector2i(232 * GameMain.scale,60* GameMain.scale), 
+				                   new Vector2i(60 * GameMain.scale,10 * GameMain.scale));
+		healthBar.setColor(0xff6a6a6a);
+		healthBar.setForegroundColor(0xffcc2a2a);
+		panel.addComponent(healthBar);
+		
+		
 	}
 	
 	public void tick(){
-		if (walking) animSprite.tick();	
+		if (walking) {
+			animSprite.tick();	
+		}
 		else animSprite.setFrame(0);
-		if (fireRate > 0) fireRate--;
+		
+		if (fireRate > 0) {
+			fireRate--;
+		}
 		int xa = 0, ya = 0;
 		if (input.up) {
 			animSprite = up;
@@ -78,9 +93,6 @@ public class Player extends Mob{
 			walking = true;
 		}else {
 			walking = false;
-		}
-		if (health <= 0){
-			System.out.println("Dead");
 		}
 		clear();
 		updateShooting();
@@ -104,6 +116,9 @@ public class Player extends Mob{
 			shoot( x, y, dir);
 			fireRate = WizardProjectile.FIRE_RATE;
 		}	
+
+		
+		healthBar.setProgress(health / 100.0);
 	}
 
 	public void render(Screen screen){

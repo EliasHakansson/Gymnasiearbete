@@ -2,7 +2,6 @@ package game.graphics;
 
 import java.util.Random;
 
-import game.entity.mob.Chaser;
 import game.entity.mob.Mob;
 import game.entity.projectile.Projectile;
 import game.level.tile.Tile;
@@ -112,10 +111,8 @@ public class Screen {
 		yp -= yOffset;
 		for(int y = 0; y < 16; y++){
 			int ya = y + yp;
-			int ys = y;
 			for(int x = 0; x < 16; x++){
-				int xa = x + xp;
-				int xs = x;	
+				int xa = x + xp;	
 				if (xa < - 16 || xa >= width || ya < 0 || ya >= height) break;
 				if (xa < 0) xa = 0;
 			}

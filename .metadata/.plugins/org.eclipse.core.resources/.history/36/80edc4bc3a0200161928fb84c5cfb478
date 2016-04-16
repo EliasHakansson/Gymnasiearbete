@@ -1,0 +1,14 @@
+package game.graphics.UI;
+
+import game.util.Vector2i;
+
+public class HealthBar extends UIComponent {
+
+	private Vector2i size;
+	
+	public HealthBar(Vector2i position, Vector2i size) {
+		super(position);
+		this.size = size;
+	}
+
+}

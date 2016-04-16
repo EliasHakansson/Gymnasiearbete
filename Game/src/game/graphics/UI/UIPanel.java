@@ -1,22 +1,22 @@
 package game.graphics.UI;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-import game.graphics.Screen;
-import game.graphics.Sprite;
 import game.util.Vector2i;
 
 public class UIPanel {
 
 	private List<UIComponent> components = new ArrayList<UIComponent>();
-	private Vector2i position;
+	private Vector2i position, size;
+	private Color color;
 	
-	private Sprite sprite;
-	
-	public UIPanel(Vector2i position){
+	public UIPanel(Vector2i position, Vector2i size){
 		this.position = position;
-		sprite = new Sprite(260, 20, 0xff383838);
+		this.size = size;
+		color = new Color(0xff404040);
 	}
 	
 	public void addComponent(UIComponent component){
@@ -30,12 +30,11 @@ public class UIPanel {
 		}
 	}
 	
-	public void render(Screen screen){
-		screen.renderSprite(position.x, position.y, sprite, false);
+	public void render(Graphics g){
+		g.setColor(color);
+		g.fillRect(position.x, position.y,size.x, size.y);
 		for (UIComponent component : components){
-			component.render();
+			component.render(g);
 		}
 	}
-
-
 }

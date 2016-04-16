@@ -1,7 +1,6 @@
 package game.entity.mob;
 
 import game.entity.projectile.EnemyPirateProjectile;
-import game.entity.projectile.WizardProjectile;
 import game.graphics.AnimatedSprite;
 import game.graphics.Screen;
 import game.graphics.Sprite;
@@ -10,6 +9,8 @@ import game.util.Debug;
 
 public class Shooter extends Mob{
 	
+	private boolean removed = false;
+	public static int health = 100;
 	
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.dummy_down, 16,16,3);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.dummy_up, 16,16,3);
@@ -18,11 +19,13 @@ public class Shooter extends Mob{
 	
 	private int fireRate = 0;
 	
+	
+	
 	private AnimatedSprite animSprite = down;
 	
 	private int time = 0;
 	private int xa = 0, ya = 0;
-
+	
 	public Shooter(int x, int y){
 		this.x = x * 16;
 		this.y = y * 16;
@@ -31,6 +34,10 @@ public class Shooter extends Mob{
 	}
 
 	public void tick() {	
+		if (health <= 0 || health >= 100){
+			removed = true;
+		}
+		
 		if (fireRate > 0) fireRate--;
 		time++;
 		if (time % (random.nextInt(50) + 30) == 0){
@@ -88,6 +95,12 @@ public class Shooter extends Mob{
 		}	
 	}
 	
+	public void remove(){
+		//remove from level
+		removed = true;
+	}
+	
+	
 	public void render(Screen screen) {	
 		//screen.renderSprite(80, 80,new Sprite(80,80, 0xff0000),true);
 		sprite = animSprite.getSprite();
@@ -95,4 +108,5 @@ public class Shooter extends Mob{
 		screen.renderMob(x-8, y-8, sprite, 0);
 		
 	}
+	
 }

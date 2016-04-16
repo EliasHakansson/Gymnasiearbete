@@ -1,6 +1,7 @@
 package game.entity.projectile;
 
 import game.entity.Spawner.ParticleSpawner;
+import game.entity.mob.Shooter;
 import game.graphics.Screen;
 import game.graphics.Sprite;
 import game.level.Level;

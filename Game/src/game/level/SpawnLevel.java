@@ -7,7 +7,6 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import game.entity.mob.Shooter;
-import game.entity.mob.Star;
 
 
 public class SpawnLevel extends Level{
