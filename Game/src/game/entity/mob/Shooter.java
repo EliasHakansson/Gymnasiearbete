@@ -6,11 +6,9 @@ import game.graphics.Screen;
 import game.graphics.Sprite;
 import game.graphics.SpriteSheet;
 import game.util.Debug;
+import game.util.Vector2i;
 
 public class Shooter extends Mob{
-	
-	private boolean removed = false;
-	public static int health = 100;
 	
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.dummy_down, 16,16,3);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.dummy_up, 16,16,3);
@@ -18,8 +16,6 @@ public class Shooter extends Mob{
 	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.dummy_right, 16,16,3);
 	
 	private int fireRate = 0;
-	
-	
 	
 	private AnimatedSprite animSprite = down;
 	
@@ -33,11 +29,44 @@ public class Shooter extends Mob{
 		fireRate = EnemyPirateProjectile.FIRE_RATE * 2;
 	}
 
-	public void tick() {	
-		if (health <= 0 || health >= 100){
-			removed = true;
-		}
+	private void move() {
+		xa = 0;
+		ya = 0;
 		
+		int px = level.getPlayerAt(0).getX();
+		int py = level.getPlayerAt(0).getY();
+		Vector2i start = new Vector2i(getX() / 16, getY() / 16);
+		Vector2i destination = new Vector2i (px / 16, py / 16);
+		if (time % 1 == 0)  {
+			path = level.findPath(start, destination);
+		}
+		if (path != null) {
+			if (path.size()> 0){
+				Vector2i vec = path.get(path.size()-1).tile;
+				
+				if (x < vec.getX() * 16){
+					xa++;
+				}
+				if (x > vec.getX() * 16){
+					xa--;
+				}
+				if (y < vec.getY() * 16){
+					ya++;
+				}
+				if (y > vec.getY() * 16){
+					ya--;
+				}
+			}
+		}
+		if(xa != 0 || ya != 0) {
+			move(xa,ya);
+			walking = true;
+		}else {
+			walking = false;
+		}
+	}
+	public void tick() {	
+		move();
 		if (fireRate > 0) fireRate--;
 		time++;
 		if (time % (random.nextInt(50) + 30) == 0){
@@ -79,10 +108,7 @@ public class Shooter extends Mob{
 		updateShooting();
 		
 	}
-	private void updateShooting(){
-		
-		
-		
+	private void updateShooting(){	
 		if( fireRate <= 0){
 			Player p = level.getClientPlayer();
 		
@@ -90,23 +116,15 @@ public class Shooter extends Mob{
 			double dy = p.getY() - y;
 			double dir = Math.atan2(dy, dx);
 			
-			pirateShoot(x, y, dir);
+			enemyShoot(x, y, dir);
 			fireRate = EnemyPirateProjectile.FIRE_RATE * 2;	
 		}	
 	}
 	
-	public void remove(){
-		//remove from level
-		removed = true;
-	}
-	
-	
 	public void render(Screen screen) {	
-		//screen.renderSprite(80, 80,new Sprite(80,80, 0xff0000),true);
+		screen.renderSprite(80, 80,new Sprite(80,80, 0xff0000),true);
 		sprite = animSprite.getSprite();
 		Debug.drawRect(screen, 17 , 57 , 100, 40, true );
 		screen.renderMob(x-8, y-8, sprite, 0);
-		
-	}
-	
+	}	
 }

@@ -27,6 +27,8 @@ public class GameMain extends Canvas implements Runnable{
 	private static final int height = 300/16*9;
 	public static final int scale = 6;					
 	public static final String title = "Game";
+	int time = 0;
+	public static int score = 0;
 	
 	private Thread thread;
 	private JFrame frame;
@@ -52,10 +54,9 @@ public class GameMain extends Canvas implements Runnable{
 		frame = new JFrame(title);										
 		key = new Keyboard();											
 		level = Level.spawn;											
-		TileCoordinate playerSpawn = new TileCoordinate(10,40);			
+		TileCoordinate playerSpawn = new TileCoordinate(50,25);			
 		player = new Player(playerSpawn.x(),playerSpawn.y(),key);		
 		level.add(player);	
-		
 		
 		addKeyListener(key);
 		
@@ -101,11 +102,7 @@ public class GameMain extends Canvas implements Runnable{
 	
 	public void run(){	
 		long lastTime = System.nanoTime();					
-		final double nsPerTick = 1000000000/60;					
-		
-		int ticks = 0;										
-		int frames = 0;										
-		
+		final double nsPerTick = 1000000000/60;													
 		long timer = System.currentTimeMillis();
 		double delta=0;										
 		
@@ -117,7 +114,6 @@ public class GameMain extends Canvas implements Runnable{
 			boolean shouldRender=true;
 			
 			while(delta >= 1){
-				ticks++;
 				tick();
 				delta --;
 				shouldRender = true;
@@ -128,19 +124,17 @@ public class GameMain extends Canvas implements Runnable{
 				e.printStackTrace();
 			}
 			if (shouldRender){
-				frames++;
 				render();
 			}
 			if(System.currentTimeMillis()- timer >= 1000){
 				timer +=1000;
-				System.out.println(frames + " fps, " + ticks + " updates/s");
-				frames=0;
-				ticks=0;
 			}
 		}
 	}
 	
-	public void tick(){	
+	public void tick(){
+		time++;
+		score = (int) (time * 1.01);
 		tickCount++;
 		key.tick();
 		level.tick();
@@ -164,8 +158,11 @@ public class GameMain extends Canvas implements Runnable{
 		int yScroll = player.getY() - screen.height / 2;
 		
 		level.render(xScroll,yScroll, screen);	
-		//screen.renderSheet(40,40,SpriteSheet.player_down, false);
-		
+		/*screen.renderSheet(40,40,SpriteSheet.player_down, false);
+		screen.renderSheet(56,40,SpriteSheet.player_up, false);
+		screen.renderSheet(72,40,SpriteSheet.player_right, false);
+		screen.renderSheet(88,40,SpriteSheet.player_left, false);
+		*/
 		for (int i = 0; i< pixels.length; i++ ){
 			pixels[i] = screen.pixels[i];
 		}

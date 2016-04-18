@@ -22,11 +22,6 @@ public class Vector2i {
 		this.y = y;
 	}
 	
-	public void test(){
-		Vector2i playerPosition = new Vector2i(80,40).setX(15);
-		Vector2i mobPosition = new Vector2i(playerPosition).add(playerPosition);
-	}
-	
 	public int getX(){
 		return x;
 	}

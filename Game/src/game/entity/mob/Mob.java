@@ -15,6 +15,8 @@ public abstract class Mob extends Entity {
 	protected List<Node> path = null;
 	protected boolean moving = false;
 	protected boolean walking = false;
+	//public List<Node> path = null;
+	public int health = 100;
 	
 	protected enum Direction {
 		UP, DOWN, LEFT, RIGHT
@@ -50,7 +52,7 @@ public abstract class Mob extends Entity {
 		level.add(p);
 	}
 	
-	public void pirateShoot(int x, int y, double dir){
+	public void enemyShoot(int x, int y, double dir){
 		Projectile ep = new EnemyPirateProjectile(x, y, dir);
 		level.add(ep);
 	}
@@ -67,6 +69,7 @@ public abstract class Mob extends Entity {
 			if (level.getTile(ix, iy).solid()){
 				solid = true;
 			}
+			
 		}
 		return solid;
 	}

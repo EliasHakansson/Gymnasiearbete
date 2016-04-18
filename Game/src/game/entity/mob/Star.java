@@ -77,7 +77,6 @@ public class Star extends Mob{
 		if (ya < 0) {
 			animSprite = up;
 			dir = Direction.UP;
-			System.out.println(ya);
 		}else if(ya > 0) {
 			animSprite = down;
 			dir = Direction.DOWN;	
@@ -88,14 +87,11 @@ public class Star extends Mob{
 		}else if(xa > 0){
 			animSprite = right;
 			dir = Direction.RIGHT;	
-		}
-		
+		}	
 	}
 
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 		screen.renderMob(x-8, y-8, sprite, 0);
-	
 	}
-
 }

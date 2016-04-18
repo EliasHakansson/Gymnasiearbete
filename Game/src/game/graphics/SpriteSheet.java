@@ -29,9 +29,6 @@ public class SpriteSheet {
 	public static SpriteSheet dummy_right = new SpriteSheet(dummy, 2,0,1,3,16);					//
 	public static SpriteSheet dummy_left = new SpriteSheet(dummy, 3,0,1,3,16);					//
 	
-	
-	
-	
 	private Sprite[] sprites;
 	
 	public SpriteSheet (SpriteSheet sheet, int x, int y, int width, int height, int spriteSize){

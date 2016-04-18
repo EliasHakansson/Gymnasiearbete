@@ -1,7 +1,6 @@
 package game.entity.projectile;
 
 import game.entity.Spawner.ParticleSpawner;
-import game.entity.mob.Shooter;
 import game.graphics.Screen;
 import game.graphics.Sprite;
 import game.level.Level;
@@ -14,16 +13,14 @@ public class WizardProjectile extends Projectile {
 
 	public WizardProjectile(int x, int y, double dir) {
 		super(x, y, dir);
-		range = 150;
-		speed = 4;
+		range = 90;
+		speed = 5;
 		damage = 20;
 		sprite = Sprite.projectile_pirate;
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
 	}
 	
-	
-
 	public void tick(){
 		if(level.tileCollision((int)(x +nx), (int)(y +ny),8, 4, 4) && Tile.wall){ 
 			wallCollision = true;
@@ -34,17 +31,17 @@ public class WizardProjectile extends Projectile {
 		move();
 		for (int i = 0; i < Level.mobs.size(); i++) {
 	         if (x < Level.mobs.get(i).getX() +10
-	            && x > Level.mobs.get(i).getX() -10// creates a 32x32 boundary, change it if your mobs are not 32x32
+	            && x > Level.mobs.get(i).getX() -10
 	            && y <  Level.mobs.get(i).getY() +10
 	            && y >  Level.mobs.get(i).getY() -10
 	            ){
 	        	 	wallCollision = false;
 	 				mobCollision = true;
-	 				level.add(new ParticleSpawner((int)x,(int)y, 20,10, level));	
-	 				remove();
-	        	 	
-	        	 	//Level.entities.get(i).health -= 1; only if your entities have health
-	            
+	 				level.add(new ParticleSpawner((int)x,(int)y, 60,50, level));
+	 				Level.mobs.remove(i);
+	 				
+	 				//Level.mobs.get(i).health -= 200; 	
+	 				remove();        	 		
 	         }
 	      }
 	}

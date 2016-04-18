@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 import game.entity.Entity;
 import game.entity.mob.Mob;
 import game.entity.mob.Player;
+import game.entity.mob.Shooter;
 import game.entity.particle.Particle;
 import game.entity.projectile.Projectile;
 import game.graphics.Screen;
@@ -20,6 +22,7 @@ public class Level {
 	protected int[] tilesInt;
 	protected int[] tiles;
 	protected int tile_size;
+	int randomSpawn;
 	
 	public static List<Entity> entities = new ArrayList<Entity>();
 	public static List<Mob> mobs = new ArrayList<Mob>();
@@ -62,6 +65,13 @@ public class Level {
 	}
 
 	public void tick(){
+		Random random = new Random();
+		randomSpawn = random.nextInt(30);
+		if (randomSpawn == 0){
+			for (int i = 0; i <1; i++){
+				add (new Shooter(random.nextInt(16) +41 ,random.nextInt(10)+17));
+			}
+		}
 		for(int i = 0; i< entities.size(); i++ ){
 			entities.get(i).tick();
 		}	
@@ -118,7 +128,7 @@ public class Level {
 		for(int c = 0; c < 4; c++){
 			int xt =(x - c % 2 * size + xOffset ) >> 4;
 			int yt =(y - c / 2 * size + yOffset) >> 4;
-			System.out.println(" ( " +xt +", " + yt+ " ) ");
+			//System.out.println(" ( " +xt +", " + yt+ " ) ");
 			if (getTile(xt, yt).solid()){
 				solid = true;
 			}

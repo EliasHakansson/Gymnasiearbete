@@ -2,19 +2,15 @@ package game.level;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Random;
-
 import javax.imageio.ImageIO;
 
-import game.entity.mob.Shooter;
-
+import game.entity.mob.Star;
 
 public class SpawnLevel extends Level{
 	
-	
+	int randomSpawn;
 	public SpawnLevel(String path){
 		super(path);
-		
 	}
 	
 	protected void loadLevel(String path){	
@@ -27,15 +23,13 @@ public class SpawnLevel extends Level{
 		}catch (IOException e){
 			e.printStackTrace();
 			System.out.println("Could not load Level file!");
+		}	
+		for (int i = 0; i < 1; i++ ) {	
+			add(new Star(50,20));	
 		}
-		Random random = new Random();
-		/*for (int i = 0; i < 1; i++ ) {	
-			add(new Chaser(10 ,8));	
-		}*/
-		for (int i = 0; i <50; i++){
-			add (new Shooter(random.nextInt(100) +10 , random.nextInt(38) + 5));
-		}
-		
+		/*for (int i = 0; i <10; i++){
+			add (new Shooter(random.nextInt(16) +41 ,random.nextInt(10)+17));
+		}*/	
 	}
 	protected void generateLevel(){	
 		for (int y = 0; y < 100; y++){

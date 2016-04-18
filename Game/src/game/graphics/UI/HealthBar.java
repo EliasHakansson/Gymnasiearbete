@@ -3,14 +3,13 @@ package game.graphics.UI;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import org.w3c.dom.ranges.RangeException;
-
+import game.GameMain;
 import game.util.Vector2i;
 
 public class HealthBar extends UIComponent {
 
 	private Vector2i size;
-	private double progress; // 0.0 - 1.0
+	private double progress; // 0.0 -> 1.0
 	
 	private Color foregroundColor;
 	
@@ -23,7 +22,8 @@ public class HealthBar extends UIComponent {
 
 	public void setProgress(double progress){
 		if (progress < 0.0 || progress > 1.0){
-			throw new RangeException(RangeException.BAD_BOUNDARYPOINTS_ERR,"Progress must be between 0 and 100");	
+			System.out.println("Your score" + GameMain.score);
+			//throw new RangeException(RangeException.BAD_BOUNDARYPOINTS_ERR,"Progress must be between 0 and 100");		
 		}
 		this.progress = progress;
 	}
