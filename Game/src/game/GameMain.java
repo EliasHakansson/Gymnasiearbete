@@ -25,10 +25,16 @@ public class GameMain extends Canvas implements Runnable{
 
 	private static final int width = 300 - 70;	// Screen - User Interface		
 	private static final int height = 300/16*9;
-	public static final int scale = 6;					
+	public static final int scale = 3;					
 	public static final String title = "Game";
-	int time = 0;
+	public static int time = 0;
+	public static int timeCounter = 0;
+	public static int timeScore = 0;
+	public static int hitScore = 0;
 	public static int score = 0;
+	public static int mobKillCount = 0;
+	public static int difficulty = 1;
+	
 	
 	private Thread thread;
 	private JFrame frame;
@@ -50,12 +56,12 @@ public class GameMain extends Canvas implements Runnable{
 		setPreferredSize(size);
 																		
 		screen = new Screen(width, height);
-		uiManager = new UIManager();								
-		frame = new JFrame(title);										
-		key = new Keyboard();											
-		level = Level.spawn;											
-		TileCoordinate playerSpawn = new TileCoordinate(50,25);			
-		player = new Player(playerSpawn.x(),playerSpawn.y(),key);		
+		uiManager = new UIManager();					
+		frame = new JFrame(title);							
+		key = new Keyboard();									
+		level = Level.spawn;									
+		TileCoordinate playerSpawn = new TileCoordinate(73,23);	
+		player = new Player(playerSpawn.x(),playerSpawn.y(),key);	
 		level.add(player);	
 		
 		addKeyListener(key);
@@ -132,13 +138,18 @@ public class GameMain extends Canvas implements Runnable{
 		}
 	}
 	
-	public void tick(){
+	public void tick(){	
 		time++;
-		score = (int) (time * 1.01);
+		timeScore = (time / 60) * difficulty;		// Mer poäng/sekund ju högre difficulty
+		score = timeScore + hitScore;
 		tickCount++;
 		key.tick();
 		level.tick();
 		uiManager.tick();
+		
+		if (time == 30*60 || time == 60*60 || time == 90*60 || time == 120*60 || time == 150*60 || time == 180*60 || time == 210*60  ){
+			difficulty++;
+		}
 		
 		for (int i =0; i <pixels.length; i++){
 			pixels[i] = screen.pixels[i];
@@ -170,9 +181,12 @@ public class GameMain extends Canvas implements Runnable{
 		g.drawImage(image, 0 ,0, width * scale, height * scale + 4 * scale, null);
 		uiManager.render(g);
 		g.setColor(Color.WHITE);				
-		g.setFont(new Font("Verdana",0,50));
+		g.setFont(new Font("Verdana",5 * scale,8 * scale));
 		//g.fillRect(Mouse.getX(), Mouse.getY(), 64, 64);						
-		//g.drawString("Button:"+Mouse.getButton(),80,80);
+		g.drawString("Score:" + score, 240 * scale, 10 * scale);
+		g.drawString("Time:" + time / 60, 240 * scale, 20 * scale);
+		g.drawString("Kills:" + mobKillCount, 240 * scale, 30 * scale);
+		g.drawString("Difficulty:" + difficulty, 240 * scale, 40 * scale);
 		g.dispose();											
 		bs.show();												
 	}

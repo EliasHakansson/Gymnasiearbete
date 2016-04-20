@@ -28,6 +28,9 @@ public class Particle extends Entity{
 		if (EnemyPirateProjectile.wallCollision){
 			sprite = Sprite.particle_wall;
 		}
+		if (EnemyPirateProjectile.playerCollision){
+			sprite = Sprite.particle_player;
+		}
 		
 		this.xa = random.nextGaussian();
 		this.ya = random.nextGaussian();

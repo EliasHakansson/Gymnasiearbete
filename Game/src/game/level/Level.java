@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
+import game.GameMain;
 import game.entity.Entity;
 import game.entity.mob.Mob;
 import game.entity.mob.Player;
@@ -66,11 +67,9 @@ public class Level {
 
 	public void tick(){
 		Random random = new Random();
-		randomSpawn = random.nextInt(30);
+		randomSpawn = random.nextInt(100 / GameMain.difficulty  );
 		if (randomSpawn == 0){
-			for (int i = 0; i <1; i++){
-				add (new Shooter(random.nextInt(16) +41 ,random.nextInt(10)+17));
-			}
+			add (new Shooter(random.nextInt(20) +65 ,random.nextInt(20)+13));
 		}
 		for(int i = 0; i< entities.size(); i++ ){
 			entities.get(i).tick();
@@ -128,7 +127,6 @@ public class Level {
 		for(int c = 0; c < 4; c++){
 			int xt =(x - c % 2 * size + xOffset ) >> 4;
 			int yt =(y - c / 2 * size + yOffset) >> 4;
-			//System.out.println(" ( " +xt +", " + yt+ " ) ");
 			if (getTile(xt, yt).solid()){
 				solid = true;
 			}
@@ -301,6 +299,7 @@ public class Level {
 		if (tiles[x + y * width] == Tile.col_spawn_flower_2) return Tile.spawn_flower_2;
 		if (tiles[x + y * width] == Tile.col_spawn_grass_1) return Tile.spawn_grass_1;
 		if (tiles[x + y * width] == Tile.col_spawn_grass_2) return Tile.spawn_grass_2;
+		
 		if (tiles[x + y * width] == Tile.col_spawn_wall_stone) return Tile.spawn_wall_stone;
 		if (tiles[x + y * width] == Tile.col_spawn_wall_top_stone) return Tile.spawn_wall_top_stone;
 		if (tiles[x + y * width] == Tile.col_spawn_wall_bottom_stone) return Tile.spawn_wall_bottom_stone;
@@ -311,17 +310,44 @@ public class Level {
 		if (tiles[x + y * width] == Tile.col_spawn_wall_topLeft_stone) return Tile.spawn_wall_topLeft_stone;
 		if (tiles[x + y * width] == Tile.col_spawn_wall_bottomLeft_stone) return Tile.spawn_wall_bottomLeft_stone;
 		if (tiles[x + y * width] == Tile.col_spawn_wall_topBottom_stone) return Tile.spawn_wall_topBottom_stone;
-		if (tiles[x + y * width] == Tile.col_spawn_water) return Tile.spawn_water;
-		if (tiles[x + y * width] == Tile.col_spawn_grass_water_edge_left) return Tile.spawn_water_edge_left;
-		if (tiles[x + y * width] == Tile.col_spawn_grass_water_edge_right) return Tile.spawn_water_edge_right;
-		if (tiles[x + y * width] == Tile.col_spawn_grass_water_edge_top) return Tile.spawn_water_edge_top;
-		if (tiles[x + y * width] == Tile.col_spawn_grass_water_edge_bottom) return Tile.spawn_water_edge_bottom;
-		if (tiles[x + y * width] == Tile.col_spawn_grass_water_edge_bottom_right) return Tile.spawn_water_edge_bottom_right;
-		if (tiles[x + y * width] == Tile.col_spawn_grass_water_edge_bottom_left) return Tile.spawn_water_edge_bottom_left;
-		if (tiles[x + y * width] == Tile.col_spawn_grass_water_edge_top_right) return Tile.spawn_water_edge_top_right;
-		if (tiles[x + y * width] == Tile.col_spawn_grass_water_edge_top_left) return Tile.spawn_water_edge_top_left;
-		if (tiles[x + y * width] == Tile.col_stone_grass) return Tile.stone_grass;
 		
+		if (tiles[x + y * width] == Tile.col_spawn_sand_1) return Tile.spawn_sand_1;
+		if (tiles[x + y * width] == Tile.col_spawn_sand_grass_bottomRight) return Tile.spawn_sand_grass_bottomRight;
+		if (tiles[x + y * width] == Tile.col_spawn_sand_grass_bottomLeft) return Tile.spawn_sand_grass_bottomLeft;
+		if (tiles[x + y * width] == Tile.col_spawn_sand_grass_topLeft) return Tile.spawn_sand_grass_topLeft;
+		if (tiles[x + y * width] == Tile.col_spawn_sand_grass_topRight) return Tile.spawn_sand_grass_topRight;
+		if (tiles[x + y * width] == Tile.col_spawn_sand_grass_top) return Tile.spawn_sand_grass_top;
+		if (tiles[x + y * width] == Tile.col_spawn_sand_grass_right) return Tile.spawn_sand_grass_right;
+		if (tiles[x + y * width] == Tile.col_spawn_sand_grass_bottom) return Tile.spawn_sand_grass_bottom;
+		if (tiles[x + y * width] == Tile.col_spawn_sand_grass_left) return Tile.spawn_sand_grass_left;
+		if (tiles[x + y * width] == Tile.col_stone_grass) return Tile.stone_grass;
+		if (tiles[x + y * width] == Tile.col_spawn_sand_grass_leftTop) return Tile.spawn_sand_grass_leftTop;
+		if (tiles[x + y * width] == Tile.col_spawn_sand_grass_rightTop) return Tile.spawn_sand_grass_rightTop;
+		if (tiles[x + y * width] == Tile.col_spawn_sand_grass_rightBottom) return Tile.spawn_sand_grass_rightBottom;
+		if (tiles[x + y * width] == Tile.col_spawn_sand_grass_leftBottom) return Tile.spawn_sand_grass_leftBottom;
+		
+		
+		if (tiles[x + y * width] == Tile.col_spawn_water_1) return Tile.spawn_water_1;
+		if (tiles[x + y * width] == Tile.col_spawn_water_2) return Tile.spawn_water_2;
+		if (tiles[x + y * width] == Tile.col_spawn_water_3) return Tile.spawn_water_3;
+		if (tiles[x + y * width] == Tile.col_spawn_water_4) return Tile.spawn_water_4;
+		if (tiles[x + y * width] == Tile.col_spawn_water_shallow_top) return Tile.spawn_water_shallow_top;
+		if (tiles[x + y * width] == Tile.col_spawn_water_shallow_right) return Tile.spawn_water_shallow_right;
+		if (tiles[x + y * width] == Tile.col_spawn_water_shallow_bottom) return Tile.spawn_water_shallow_bottom;
+		if (tiles[x + y * width] == Tile.col_spawn_water_shallow_left) return Tile.spawn_water_shallow_left;
+		if (tiles[x + y * width] == Tile.col_spawn_water_sand_top) return Tile.spawn_water_sand_top;
+		if (tiles[x + y * width] == Tile.col_spawn_water_sand_right) return Tile.spawn_water_sand_right;
+		if (tiles[x + y * width] == Tile.col_spawn_water_sand_bottom) return Tile.spawn_water_sand_bottom;
+		if (tiles[x + y * width] == Tile.col_spawn_water_sand_left) return Tile.spawn_water_sand_left;
+		if (tiles[x + y * width] == Tile.col_spawn_water_sand_topLeft) return Tile.spawn_water_sand_topLeft;
+		if (tiles[x + y * width] == Tile.col_spawn_water_sand_topRight) return Tile.spawn_water_sand_topRight;
+		if (tiles[x + y * width] == Tile.col_spawn_water_sand_bottomRight) return Tile.spawn_water_sand_bottomRight;
+		if (tiles[x + y * width] == Tile.col_spawn_water_sand_bottomLeft) return Tile.spawn_water_sand_bottomLeft;
+		if (tiles[x + y * width] == Tile.col_spawn_water_shallow_bottomRight) return Tile.spawn_water_shallow_bottomRight;
+		if (tiles[x + y * width] == Tile.col_spawn_water_shallow_bottomLeft) return Tile.spawn_water_shallow_bottomLeft;
+		if (tiles[x + y * width] == Tile.col_spawn_water_shallow_topLeft) return Tile.spawn_water_shallow_topLeft;
+		if (tiles[x + y * width] == Tile.col_spawn_water_shallow_topRight) return Tile.spawn_water_shallow_topRight;
+
 		return Tile.voidTile;	
 		
 		

@@ -42,7 +42,6 @@ public abstract class Mob extends Entity {
 		}
 	}
 	
-	
 	public abstract void tick();
 	
 	public abstract void render(Screen screen);

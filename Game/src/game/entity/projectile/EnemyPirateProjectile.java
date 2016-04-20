@@ -17,23 +17,23 @@ public class EnemyPirateProjectile extends Projectile {
 	
 	public EnemyPirateProjectile(int x, int y, double dir) {
 		super(x, y, dir);
-		range = random.nextInt(20) +100;
-		speed = 2.5;
-		damage = 20;
+		range = random.nextInt(20) +80;
+		speed = 2.0;
 		sprite = Sprite.projectile_arrow;
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
 	}
 
 	public void tick(){
-		if(level.tileCollision((int)(x +nx), (int)(y +ny),8, 6, 6) &&  Tile.wall){ 
+		if(level.tileCollision((int)(x +nx), (int)(y +ny),8, 6, 6) &&  Tile.wall){ 		//Kollar kollision med vägg
 			remove();
 			wallCollision = true;
+			mobCollision = false;
 			mobCollision = false;
 			level.add(new ParticleSpawner((int)x,(int)y, 45,20, level));
 		}
 		move();
-		for (int i = 0; i < Level.players.size(); i++) {
+		for (int i = 0; i < Level.players.size(); i++) {						//Kollar kollision med spelare
 	         if (x < Level.players.get(i).getX() +10
 	            && x > Level.players.get(i).getX() -10
 	            && y <  Level.players.get(i).getY() +10
@@ -41,9 +41,10 @@ public class EnemyPirateProjectile extends Projectile {
 	            ) 
 	         	{	 	 	
 	        	 	wallCollision = false;
-	        	 	mobCollision = true;
+	        	 	playerCollision = true;
+	        	 	mobCollision = false;
 	        	 	level.add(new ParticleSpawner((int)x,(int)y, 15,10, level));
-	        	 	Player.health -= 5;
+	        	 	Player.health -= 5;												
 	        	 	remove();
 	        	 	
 	         }

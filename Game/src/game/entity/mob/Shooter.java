@@ -37,7 +37,7 @@ public class Shooter extends Mob{
 		int py = level.getPlayerAt(0).getY();
 		Vector2i start = new Vector2i(getX() / 16, getY() / 16);
 		Vector2i destination = new Vector2i (px / 16, py / 16);
-		if (time % 1 == 0)  {
+		if (time % 2 == 0)  {
 			path = level.findPath(start, destination);
 		}
 		if (path != null) {

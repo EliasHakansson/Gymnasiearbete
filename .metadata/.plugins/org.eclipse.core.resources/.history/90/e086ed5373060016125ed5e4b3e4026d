@@ -1,0 +1,115 @@
+package game.level.tile;
+
+import game.graphics.Screen;
+import game.graphics.Sprite;
+
+public class Tile {
+	
+	public static boolean wall = false;
+	
+	public Sprite sprite;
+	
+	public static Tile voidTile       	= new VoidTile(Sprite.voidSprite);
+	public static Tile stone_grass    	= new WallTile(Sprite.spawn_stone_grass);
+	
+	public static Tile spawn_grass_1						= new GrassTile(Sprite.spawn_grass_1);
+	public static Tile spawn_grass_2						= new GrassTile(Sprite.spawn_grass_2);
+	public static Tile spawn_flower_1						= new GrassTile(Sprite.spawn_flower_1);
+	public static Tile spawn_flower_2						= new GrassTile(Sprite.spawn_flower_2);
+	
+	public static Tile spawn_wall_stone						= new WallTile(Sprite.spawn_wall_stone);
+	public static Tile spawn_wall_top_stone 				= new WallTile(Sprite.spawn_wall_top_stone);
+	public static Tile spawn_wall_topBottom_stone 			= new WallTile(Sprite.spawn_wall_topBottom_stone);
+	public static Tile spawn_wall_bottom_stone 				= new WallTile(Sprite.spawn_wall_bottom_stone);
+	public static Tile spawn_wall_topRight_stone 			= new WallTile(Sprite.spawn_wall_topRight_stone);
+	public static Tile spawn_wall_bottomRight_stone 		= new WallTile(Sprite.spawn_wall_bottomRight_stone);
+	public static Tile spawn_wall_bottomLeft_stone 			= new WallTile(Sprite.spawn_wall_bottomLeft_stone);
+	public static Tile spawn_wall_topLeft_stone 			= new WallTile(Sprite.spawn_wall_topLeft_stone);
+	public static Tile spawn_wall_rightSide_stone 			= new WallTile(Sprite.spawn_wall_rightSide_stone);
+	public static Tile spawn_wall_leftSide_stone 			= new WallTile(Sprite.spawn_wall_leftSide_stone);
+	
+	public static Tile spawn_floor_wood						= new GrassTile(Sprite.spawn_floor_wood);	
+	
+	public static Tile spawn_sand_1       = new GrassTile(Sprite.spawn_sand_1);
+	 public static Tile spawn_sand_grass_bottomRight   = new GrassTile(Sprite.spawn_sand_grass_bottomRight);
+	 public static Tile spawn_sand_grass_bottomLeft   = new GrassTile(Sprite.spawn_sand_grass_bottomLeft);
+	 public static Tile spawn_sand_grass_topLeft    = new GrassTile(Sprite.spawn_sand_grass_topLeft);
+	 public static Tile spawn_sand_grass_topRight   = new GrassTile(Sprite.spawn_sand_grass_topRight);
+	 public static Tile spawn_sand_grass_top     = new GrassTile(Sprite.spawn_sand_grass_top);
+	 public static Tile spawn_sand_grass_right    = new GrassTile(Sprite.spawn_sand_grass_right);
+	 public static Tile spawn_sand_grass_bottom    = new GrassTile(Sprite.spawn_sand_grass_bottom);
+	 public static Tile spawn_sand_grass_left    = new GrassTile(Sprite.spawn_sand_grass_left);
+
+	 public static Tile spawn_water_1      = new WaterTile(Sprite.spawn_water_1);
+	 public static Tile spawn_water_2      = new WaterTile(Sprite.spawn_water_2);
+	 public static Tile spawn_water_3      = new WaterTile(Sprite.spawn_water_3);
+	 public static Tile spawn_water_4      = new WaterTile(Sprite.spawn_water_4);
+	 public static Tile spawn_water_shallow_top    = new WaterTile(Sprite.spawn_water_shallow_top);
+	 public static Tile spawn_water_shallow_right   = new WaterTile(Sprite.spawn_water_shallow_right);
+	 public static Tile spawn_water_shallow_bottom   = new WaterTile(Sprite.spawn_water_shallow_bottom);
+	 public static Tile spawn_water_shallow_left    = new WaterTile(Sprite.spawn_water_shallow_left);
+	 public static Tile spawn_water_sand_top     = new WaterTile(Sprite.spawn_water_sand_top);
+	 public static Tile spawn_water_sand_right    = new WaterTile(Sprite.spawn_water_sand_right);
+	 public static Tile spawn_water_sand_bottom    = new WaterTile(Sprite.spawn_water_sand_bottom);
+	 public static Tile spawn_water_sand_left    = new WaterTile(Sprite.spawn_water_sand_left);
+	 public static Tile spawn_water_sand_topLeft    = new WaterTile(Sprite.spawn_water_sand_topLeft);
+	 public static Tile spawn_water_sand_topRight   = new WaterTile(Sprite.spawn_water_sand_topRight);
+	 public static Tile spawn_water_sand_bottomRight   = new WaterTile(Sprite.spawn_water_sand_bottomRight);
+	 public static Tile spawn_water_sand_bottomLeft   = new WaterTile(Sprite.spawn_water_sand_bottomLeft);
+	
+	public static final int col_spawn_grass_1						= 0xff0ff00f;
+	public static final int col_spawn_grass_2 						= 0xff007F46;
+	public static final int col_spawn_flower_1 						= 0xffffff00;
+	public static final int col_spawn_flower_2 						= 0xffff00DC;
+	public static final int col_spawn_wall_stone 					= 0xff808080;
+	public static final int col_spawn_wall_top_stone 				= 0xffFF0000;
+	public static final int col_spawn_wall_bottom_stone 			= 0xff0026FF;
+	public static final int col_spawn_wall_rightSide_stone 			= 0xffFF006E;
+	public static final int col_spawn_wall_leftSide_stone 			= 0xff00FFFF;
+	public static final int col_spawn_wall_topRight_stone 			= 0xffFF7F7F;
+	public static final int col_spawn_wall_topBottom_stone 			= 0xff404040;
+	public static final int col_spawn_wall_topLeft_stone 			= 0xff007F0E;
+	public static final int col_spawn_wall_bottomRight_stone		= 0xffffffff;
+	public static final int col_spawn_wall_bottomLeft_stone 		= 0xffB6FF00;
+	public static final int col_spawn_wood 							= 0xffA56B43;
+	public static final int col_stone_grass							= 0xff382626;
+	public static final int col_spawn_sand_1      					= 0xffD1FF54;
+	public static final int col_spawn_sand_grass_bottomRight 		= 0xffE4FF7C;
+	public static final int col_spawn_sand_grass_bottomLeft   		= 0xffDDFF49;
+	public static final int col_spawn_sand_grass_topLeft   			= 0xffFFEB3F;
+	public static final int col_spawn_sand_grass_topRight   		= 0xffF5FF42;
+	public static final int col_spawn_sand_grass_top    			= 0xffF9FF89;
+	public static final int col_spawn_sand_grass_right    			= 0xffFFEE59;
+	public static final int col_spawn_sand_grass_bottom    			= 0xffEAFFA0;
+	public static final int col_spawn_sand_grass_left    			= 0xffFFF072;
+	 
+	public static final int col_spawn_water_1      					= 0xff1C1CFF;
+	public static final int col_spawn_water_2      					= 0xff4921FF;
+	public static final int col_spawn_water_3      					= 0xff493FFF;
+	public static final int col_spawn_water_4      					= 0xff596CFF;
+	public static final int col_spawn_water_shallow_top    			= 0xff4983FF;
+	public static final int col_spawn_water_shallow_right   		= 0xff3DB4FF;
+	public static final int col_spawn_water_shallow_bottom   		= 0xff919AFF;
+	public static final int col_spawn_water_shallow_left   			= 0xff9670FF;
+	public static final int col_spawn_water_sand_top    			= 0xff6F3FFF;
+	public static final int col_spawn_water_sand_right    			= 0xff0A68FF;
+	public static final int col_spawn_water_sand_bottom    			= 0xff2821FF;
+	public static final int col_spawn_water_sand_left    			= 0xff2361FF;
+	public static final int col_spawn_water_sand_topLeft   			= 0xff4828FF;
+	public static final int col_spawn_water_sand_topRight   		= 0xff498CFF;
+	public static final int col_spawn_water_sand_bottomRight  		= 0xff3DB4FF;
+	public static final int col_spawn_water_sand_bottomLeft   		= 0xff38D3FF;
+	
+	public Tile(Sprite sprite){
+		this.sprite = sprite;
+	}
+	
+	public void render(int x, int y, Screen screen){
+	}
+	
+	public boolean solid(){
+		return false;
+	}
+	
+	
+}

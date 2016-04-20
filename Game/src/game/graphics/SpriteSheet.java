@@ -12,7 +12,7 @@ public class SpriteSheet {
 	public int[] pixels;
 	
 	public static SpriteSheet tiles = new SpriteSheet("/textures/sheets/SpritesTEMP.png",256);
-	public static SpriteSheet spawn_level = new SpriteSheet("/textures/sheets/SpriteSPAWN.png", 112);
+	public static SpriteSheet spawn_level = new SpriteSheet("/textures/sheets/SpriteSPAWN2.png", 258,112);
 	public static SpriteSheet pirate_projectiles = new SpriteSheet("/textures/sheets/projectiles/pirate_projectiles.png", 32);
 	
 	public static SpriteSheet player = new SpriteSheet("/textures/sheets/Sprites_player.png", 64,48);

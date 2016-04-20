@@ -1,5 +1,6 @@
 package game.entity.projectile;
 
+import game.GameMain;
 import game.entity.Spawner.ParticleSpawner;
 import game.graphics.Screen;
 import game.graphics.Sprite;
@@ -22,14 +23,14 @@ public class WizardProjectile extends Projectile {
 	}
 	
 	public void tick(){
-		if(level.tileCollision((int)(x +nx), (int)(y +ny),8, 4, 4) && Tile.wall){ 
+		if(level.tileCollision((int)(x +nx), (int)(y +ny),8, 4, 4) && Tile.wall){ 	//Kollar kollision med vägg
 			wallCollision = true;
 			mobCollision = false;
     	 	level.add(new ParticleSpawner((int)x,(int)y, 45,20, level));
 			remove();	
 		}
 		move();
-		for (int i = 0; i < Level.mobs.size(); i++) {
+		for (int i = 0; i < Level.mobs.size(); i++) {								//Kollar kollision med fiender
 	         if (x < Level.mobs.get(i).getX() +10
 	            && x > Level.mobs.get(i).getX() -10
 	            && y <  Level.mobs.get(i).getY() +10
@@ -37,13 +38,15 @@ public class WizardProjectile extends Projectile {
 	            ){
 	        	 	wallCollision = false;
 	 				mobCollision = true;
+	 				playerCollision = false;
 	 				level.add(new ParticleSpawner((int)x,(int)y, 60,50, level));
 	 				Level.mobs.remove(i);
+	 				GameMain.hitScore += 10 * GameMain.difficulty;		//10 poäng/kill vid difficulty 1, Högre poäng ju högre difficulty. 20 poäng vid difficulty 2 osv.
+	 				GameMain.mobKillCount++;
+	 				remove();
 	 				
-	 				//Level.mobs.get(i).health -= 200; 	
-	 				remove();        	 		
 	         }
-	      }
+	     }
 	}
 	
 	protected void move(){
