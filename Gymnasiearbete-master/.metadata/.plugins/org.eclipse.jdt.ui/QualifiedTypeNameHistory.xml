@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
+<fullyQualifiedTypeName name="game.level.SpawnLevel"/>
+<fullyQualifiedTypeName name="game.level.tile.Spawn_level.SpawnGrassTile"/>
+<fullyQualifiedTypeName name="java.awt.GraphicsEnvironment"/>
+<fullyQualifiedTypeName name="game.input.InventoryMouse"/>
+<fullyQualifiedTypeName name="game.graphics.SpriteSheet"/>
+<fullyQualifiedTypeName name="game.entity.Entity"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="game.level.Node"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="game.graphics.Sprite"/>
+<fullyQualifiedTypeName name="game.graphics.Screen"/>
+<fullyQualifiedTypeName name="game.entity.mob.Mob"/>
+<fullyQualifiedTypeName name="game.entity.projectile.WizardProjectile"/>
+<fullyQualifiedTypeName name="game.entity.particle.Particle"/>
+<fullyQualifiedTypeName name="game.level.tile.Tile"/>
+<fullyQualifiedTypeName name="game.level.Level"/>
+<fullyQualifiedTypeName name="game.GameMain"/>
+<fullyQualifiedTypeName name="game.util.Debug"/>
+</qualifiedTypeNameHistroy>

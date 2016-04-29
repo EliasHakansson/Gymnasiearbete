@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -12,39 +11,25 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
-import game.entity.mob.Player;
 import game.graphics.Screen;
-import game.graphics.UI.UIManager;
 import game.input.Keyboard;
-import game.input.Mouse;
 import game.level.Level;
-import game.level.TileCoordinate;
+import game.level.RandomLevel;
 
 public class GameMain extends Canvas implements Runnable{
+	
 	private static final long serialVersionUID = 1L;
 
-	private static final int width = 300 - 70;	// Screen - User Interface		
-	private static final int height = 300/16*9;
-	public static final int scale = 3;					
-	public static final String title = "Game";
-	public static int time = 0;
-	public static int timeCounter = 0;
-	public static int timeScore = 0;
-	public static int hitScore = 0;
-	public static int score = 0;
-	public static int mobKillCount = 0;
-	public static int difficulty = 1;
-	
-	
-	private Thread thread;
-	private JFrame frame;
+	public static final int width = 300;					
+	public static final int height = width/16*9;
+	public static final int scale =5;					
+	public static final String name = "Game";
 	private Keyboard key;
+	private JFrame frame;
 	private Level level;
-	private Player player;
+	
 	public boolean running = false;
 	public int tickCount = 0;
-	
-	private static UIManager uiManager;
 	
 	private Screen screen;
 	
@@ -52,45 +37,26 @@ public class GameMain extends Canvas implements Runnable{
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();			 
 	
 	public GameMain(){
-		Dimension size = (new Dimension(width*scale +60*scale,height*scale));
-		setPreferredSize(size);
-																		
+		Dimension canvasSize = (new Dimension(width*scale,height*scale));
+		setPreferredSize(canvasSize);
+	
 		screen = new Screen(width, height);
-		uiManager = new UIManager();					
-		frame = new JFrame(title);							
-		key = new Keyboard();									
-		level = Level.spawn;									
-		TileCoordinate playerSpawn = new TileCoordinate(73,23);	
-		player = new Player(playerSpawn.x(),playerSpawn.y(),key);	
-		level.add(player);	
+		frame = new JFrame(name);
+		key = new Keyboard();
+		level = new RandomLevel(64,64);
 		
 		addKeyListener(key);
 		
-		Mouse mouse = new Mouse();
-		addMouseListener(mouse);
-		addMouseMotionListener(mouse);
-															
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);			
-		frame.setLayout(new BorderLayout());							
-		frame.add(this, BorderLayout.CENTER);							
-		frame.pack();													
-		frame.setResizable(false);										
-		frame.setLocationRelativeTo(null);								
-		frame.setVisible(true);											
-	}	
-	
-																		
-	
-	public static int getWindowWidth(){
-		return width*scale;
-	}
-	public static int getWindowHeight(){
-		return height*scale;
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout());					
+		frame.add(this, BorderLayout.CENTER);					
+		frame.pack();											
+		frame.setResizable(false);								
+		frame.setLocationRelativeTo(null);						
+		frame.setVisible(true);									
 	}
 	
-	public static UIManager getUIManager(){
-		return uiManager;
-	}
+	private Thread thread;
 	
 	public synchronized void start() {								
 		running = true;
@@ -108,7 +74,11 @@ public class GameMain extends Canvas implements Runnable{
 	
 	public void run(){	
 		long lastTime = System.nanoTime();					
-		final double nsPerTick = 1000000000/60;													
+		double nsPerTick = 1000000000/60;					
+		
+		int ticks = 0;										
+		int frames = 0;										
+		
 		long timer = System.currentTimeMillis();
 		double delta=0;										
 		
@@ -120,6 +90,7 @@ public class GameMain extends Canvas implements Runnable{
 			boolean shouldRender=true;
 			
 			while(delta >= 1){
+				ticks++;
 				tick();
 				delta --;
 				shouldRender = true;
@@ -128,69 +99,53 @@ public class GameMain extends Canvas implements Runnable{
 				Thread.sleep(2);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
+			}			
 			if (shouldRender){
+				frames++;
 				render();
-			}
+			}		
 			if(System.currentTimeMillis()- timer >= 1000){
 				timer +=1000;
+				System.out.println(frames + " fps, " + ticks + " updates/s");
+				frames=0;
+				ticks=0;
 			}
 		}
-	}
+	}	
+	int x=0, y=0;
 	
 	public void tick(){	
-		time++;
-		timeScore = (time / 60) * difficulty;		// Mer poäng/sekund ju högre difficulty
-		score = timeScore + hitScore;
 		tickCount++;
-		key.tick();
-		level.tick();
-		uiManager.tick();
-		
-		if (time == 30*60 || time == 60*60 || time == 90*60 || time == 120*60 || time == 150*60 || time == 180*60 || time == 210*60  ){
-			difficulty++;
-		}
+		key.update();
+		if(key.up) y--;
+		if(key.down) y++;
+		if(key.left) x--;
+		if(key.right) x++;
 		
 		for (int i =0; i <pixels.length; i++){
 			pixels[i] = screen.pixels[i];
 		}
-		
 	}	
-	
 	public void render(){												
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {										
 			createBufferStrategy(3);							
 			return;
 		}
-		
 		screen.clear();		
-		int xScroll = player.getX() - screen.width / 2;
-		int yScroll = player.getY() - screen.height / 2;
+		level.render(x, y, screen);
 		
-		level.render(xScroll,yScroll, screen);	
-		/*screen.renderSheet(40,40,SpriteSheet.player_down, false);
-		screen.renderSheet(56,40,SpriteSheet.player_up, false);
-		screen.renderSheet(72,40,SpriteSheet.player_right, false);
-		screen.renderSheet(88,40,SpriteSheet.player_left, false);
-		*/
 		for (int i = 0; i< pixels.length; i++ ){
 			pixels[i] = screen.pixels[i];
 		}
-		Graphics g = bs.getDrawGraphics();
-		g.drawImage(image, 0 ,0, width * scale, height * scale + 4 * scale, null);
-		uiManager.render(g);
-		g.setColor(Color.WHITE);				
-		g.setFont(new Font("Verdana",5 * scale,8 * scale));
-		//g.fillRect(Mouse.getX(), Mouse.getY(), 64, 64);						
-		g.drawString("Score:" + score, 240 * scale, 10 * scale);
-		g.drawString("Time:" + time / 60, 240 * scale, 20 * scale);
-		g.drawString("Kills:" + mobKillCount, 240 * scale, 30 * scale);
-		g.drawString("Difficulty:" + difficulty, 240 * scale, 40 * scale);
+		Graphics g = bs.getDrawGraphics();						
+		
+		g.setColor(new Color(20, 70, 120));						
+		g.fillRect(0, 0, getWidth(), getHeight());						
+		g.drawImage(image, 0 ,0, getWidth(), getHeight(), null);
 		g.dispose();											
 		bs.show();												
 	}
-	
 	public static void main(String[]args) {
 		new GameMain().start();	
 	}	

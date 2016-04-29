@@ -1,9 +1,0 @@
-package game.graphics.UI;
-
-public class UIComponent {
-
-	public void tick(){
-		
-	}
-	
-}
